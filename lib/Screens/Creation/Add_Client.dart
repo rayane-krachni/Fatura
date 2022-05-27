@@ -1,28 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:freelance/Querries/Fournisseur_Session.dart';
-import 'package:freelance/Screens/Fournisseur.dart';
+import 'package:freelance/Querries/Client_session.dart';
 import 'package:freelance/Screens/HomePage.dart';
-import 'package:freelance/widgets/Wrong_Diag.dart';
+import 'package:freelance/Screens/Home_Client.dart';
+import 'package:freelance/widgets/Success_Diag.dart';
 
-import '../../Querries/Facture_Session.dart';
 import '../../Theme/Theme.dart';
-import '../../widgets/Success_Diag.dart';
 
-class AddFournisseurs extends StatefulWidget {
-  const AddFournisseurs({Key? key}) : super(key: key);
+class Add_client extends StatefulWidget {
+  const Add_client({Key? key}) : super(key: key);
 
   @override
-  State<AddFournisseurs> createState() => _AddFournisseursState();
+  State<Add_client> createState() => _Add_clientState();
 }
 
-class _AddFournisseursState extends State<AddFournisseurs> {
-  TextEditingController ? name_control,company_control,address_control,willaya_control,activity_control,nic_control,nif_control,art_control,rc_control,phone_control;
+class _Add_clientState extends State<Add_client> {
+  TextEditingController ? name_control,address_control,willaya_control,activity_control,nic_control,nif_control,art_control,rc_control,phone_control;
 
   @override
   void initState() {
     // TODO: implement initState
     name_control= new TextEditingController();
-    company_control=new TextEditingController();
     address_control= new TextEditingController();
     willaya_control= new TextEditingController();
     activity_control= new TextEditingController();
@@ -33,7 +30,6 @@ class _AddFournisseursState extends State<AddFournisseurs> {
     phone_control= new TextEditingController();
   }
   String get name => name_control!.text;
-  String get company => company_control!.text;
   String get Address => address_control!.text;
   String get willaya => willaya_control!.text;
   String get activite => activity_control!.text;
@@ -43,23 +39,19 @@ class _AddFournisseursState extends State<AddFournisseurs> {
   String get rc => rc_control!.text;
   int get phone => int.parse(phone_control!.text);
 
-  void Insert_Fournisseur()async {
+  void Insert_Client()async {
 
-    int insrtcleint= await FournisseurSession.AddFournisseur(name,company, Address, willaya, activite, nic, nif, art, rc, phone);
+    int insrtcleint=   await ClientSession.AddClient( name,Address, willaya,  activite,  nic,  nif,  art,  rc,  phone);
     if( insrtcleint!= 0)
     {
-      print('hgjgh');
-    //  showDialog(context: context, builder:(_)=> Wrong_Dialog());
-
-     showDialog(context: context, builder:(_)=> Success_Dialog(mytext: "Le nouveau Founisseur a ete bien ajoutee",mywidgets:()=>HomePage()));
+      showDialog(context: context, builder:(_)=>Success_Dialog(mytext: "Client done",mywidgets :()=> HomePage()));
     }
     else {
       print('results $insrtcleint');
-      showDialog(context: context, builder:(_)=> Wrong_Dialog());
-
     }
 
   }
+
   @override
   Widget build(BuildContext context) {
     double _width=MediaQuery.of(context).size.width;
@@ -116,32 +108,7 @@ class _AddFournisseursState extends State<AddFournisseurs> {
                               ),
                             )),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 7.0),
-                        child: Container(
 
-                            height: _height*0.062,
-                            width: double.infinity,
-                            decoration:  BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.all(Radius.circular(15)),
-                                boxShadow: [BoxShadow(
-                                    blurRadius:5 ,
-                                    color: Colors.grey.withOpacity(0.2),
-                                    offset: Offset(0,3)
-                                )]
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(top:1.0,left: 15,right: 5,bottom: 6),
-                              child: TextFormField(
-                                controller: company_control,
-                                decoration: const InputDecoration(
-                                  hintText: "Entreprise",
-                                  suffixIcon:  Icon(Icons.home_work_sharp,size: 18,),
-                                ),
-                              ),
-                            )),
-                      ),
                       Padding(
                         padding: const EdgeInsets.only(top: 7.0),
                         child: Container(
@@ -161,7 +128,6 @@ class _AddFournisseursState extends State<AddFournisseurs> {
                               padding: const EdgeInsets.only(top:1.0,left: 15,right: 5,bottom:12),
                               child: TextFormField(
                                 controller: phone_control,
-                                keyboardType: TextInputType.number,
                                 decoration: const InputDecoration(
                                   hintText: "Tel phone",
                                   suffixIcon:  Icon(Icons.phone,size: 18,),
@@ -189,7 +155,7 @@ class _AddFournisseursState extends State<AddFournisseurs> {
                               child: TextFormField(
                                 controller: address_control,
                                 decoration: InputDecoration(
-                                    hintText: "Addreds",
+                                    hintText: "Addres",
                                     suffixIcon: Icon(Icons.add_location,size: 18,)
                                 ),
                               ),
@@ -373,8 +339,8 @@ class _AddFournisseursState extends State<AddFournisseurs> {
                   ),  ),
 
                 child: ElevatedButton(
-                    onPressed: () {
-                      Insert_Fournisseur();
+                    onPressed: ()  {
+                       Insert_Client();
                     },
 
                     style: ElevatedButton.styleFrom(primary: Colors.transparent, shadowColor: Colors.transparent),

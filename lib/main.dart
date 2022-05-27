@@ -1,5 +1,6 @@
+
+
 import 'package:flutter/material.dart';
-import 'package:freelance/Theme/Theme.dart';
 import 'package:freelance/splashScreen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
             fontWeight: FontWeight.bold,
             fontStyle: FontStyle.normal,
           ),
-          labelStyle: TextStyle(
+          labelStyle: const TextStyle(
             color: Colors.teal,
           ),
 
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home:  const SlpashScreen(),
+
     );
   }
 }

@@ -1,12 +1,14 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 class ThemeStyle{
   static const primaryColor = Color(0xFF4BC7CF);
   static const dangerColor = Color(0xFFFF0000);
   static const successColor = Color(0xFF046537);
+  static const teal =Colors.teal;
   static const scaffoldBgColor = Color(0xFFF5F5F5);
   static const inputFill = Color(0xFFF2F2F2);
   static const inactiveIcon = Color(0xFF6E6E6E);

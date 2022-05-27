@@ -1,0 +1,37 @@
+import 'package:freelance/Model/Produit/Produit_Facture.dart';
+import 'package:freelance/Model/Produit/Produit_Model.dart';
+import 'package:freelance/Querries/AppConfigue.dart';
+
+
+
+class ProduitSession{
+  static SqlDb mysqldb =SqlDb();
+  static  Future<int> Addproduit(String name,int tva,double prix,String code,int stock) async{
+    print ("response +++++++");
+    int response = await mysqldb.insertDatabase("INSERT INTO 'produit' (name,tva,prix,code,stock) VALUES (?,?,?,?,?)",[name,tva,prix,code,stock]);
+    print ("response ====");
+    print ("response $response");
+    return response;
+
+  }
+
+  static Future<List<Produit_Model>> GetAllProducts() async{
+
+    var response= await mysqldb.readDatabase('SELECT * FROM "produit"');
+
+    List<Produit_Model> listProduit=(response as List).map((e) => Produit_Model.formMap(e)).toList();
+
+    return listProduit;
+  }
+
+  static Future<List<ProduitFacture_Model>>   getProduitName() async {
+    var response2= await mysqldb.readDatabase('SELECT "id","name"  FROM "produit" ' );
+    List<ProduitFacture_Model> information = (response2 as List).map((c) => ProduitFacture_Model.fromMap(c)).toList();
+    print("msg msg from session");
+    return information;
+  }
+
+
+
+
+}

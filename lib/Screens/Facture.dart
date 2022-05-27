@@ -1,5 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:freelance/Screens/Consultation/Bon_Livraison.dart';
+import 'package:freelance/Screens/Consultation/Facture.dart';
+import 'package:freelance/Screens/Creation/Bon_Livraisson.dart';
+import 'package:freelance/Screens/Creation/Facture.dart';
+import 'package:freelance/Screens/Creation/Fournisseur.dart';
 import 'package:freelance/Theme/Theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,7 +22,7 @@ class _FactureState extends State<Facture> {
     double _height=MediaQuery.of(context).size.height;
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.only(top: 5.0,left: 20,right: 20,bottom: 20),
         child: Column(
           children: [
             Row(
@@ -51,7 +56,7 @@ class _FactureState extends State<Facture> {
                     children: [
                       Align(
                           alignment: Alignment.topLeft,
-                          child: Text("Les bonnes des Factures",style: ThemeStyle.initialtitle)),
+                          child: Text("Les bonnes des Factures",style: GoogleFonts.lato(color: Colors.teal,fontWeight:FontWeight.bold,fontSize: 18 ))),
                       const SizedBox(height: 10,),
                       Text(" Vous pouvez consulter ou bien Creer des  nouveaux Factures ",style: ThemeStyle.secondtitle,),
                       const SizedBox(height: 10,),
@@ -61,27 +66,43 @@ class _FactureState extends State<Facture> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              SizedBox(
-                                height: _height*0.1,
-                                width: _width*0.4,
+                              Material(
+                                child: InkWell(
 
-                                child: Column(
-                                  children:  [
-                                    const Icon(Icons.fact_check_outlined,color: Colors.grey,size: 33,),
-                                    const SizedBox(height: 10,),
-                                    Text("Consultation",style: GoogleFonts.lato(color: Colors.grey,fontWeight:FontWeight.bold,fontSize: 14 )),
-                                  ],
+                                  focusColor: Colors.teal,
+                                  highlightColor:Colors.teal,
+                                  onTap: ()=> {Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => Consulte_Facture() ))},
+                                  child: SizedBox(
+                                    height: _height*0.1,
+                                    width: _width*0.4,
+
+                                    child: Column(
+                                      children:  [
+                                        const Icon(Icons.fact_check_outlined,color: Colors.grey,size: 33,),
+                                        const SizedBox(height: 10,),
+                                        Text("Consultation",style: GoogleFonts.lato(color: Colors.grey,fontWeight:FontWeight.bold,fontSize: 14 )),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ),
-                              SizedBox(
-                                height: _height*0.1,
-                                width: _width*0.4,
-                                child:  Column(
-                                  children:  [
-                                    const Icon(Icons.post_add,color: Colors.grey,size: 35,),
-                                    const SizedBox(height: 10,),
-                                    Text("Creations",style: GoogleFonts.lato(color: Colors.grey,fontWeight:FontWeight.bold,fontSize: 14 )),
-                                  ],
+                              Material(
+                                child: InkWell(
+                                  focusColor: Colors.teal,
+                                  highlightColor:Colors.teal,
+
+                                  onTap: ()=> {Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => AddFacture() ))},
+                                  child: SizedBox(
+                                    height: _height*0.1,
+                                    width: _width*0.4,
+                                    child:  Column(
+                                      children:  [
+                                        const Icon(Icons.post_add,color: Colors.grey,size: 35,),
+                                        const SizedBox(height: 10,),
+                                        Text("Creations",style: GoogleFonts.lato(color: Colors.grey,fontWeight:FontWeight.bold,fontSize: 14 )),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ),
                             ],
@@ -128,11 +149,18 @@ class _FactureState extends State<Facture> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              SizedBox(
-                                  height: _height*0.1,
-                                  width: _width*0.4,
+                              Material(
+                                child: InkWell(
 
-                                  child: Column(
+                                  focusColor: Colors.teal,
+                                  highlightColor:Colors.teal,
+
+                                  onTap: ()=> {Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => Consulte_Bon() ))},
+                                  child: SizedBox(
+                                    height: _height*0.1,
+                                    width: _width*0.4,
+
+                                    child: Column(
                                       children:  [
                                         const Icon(Icons.fact_check_outlined,color: Colors.grey,size: 33,),
                                         const SizedBox(height: 10,),
@@ -140,10 +168,18 @@ class _FactureState extends State<Facture> {
                                       ],
                                     ),
                                   ),
-                              Container(
-                                  height: _height*0.1,
-                                  width: _width*0.4,
-                                  child:  Column(
+                                ),
+                              ),
+                              Material(
+                                child: InkWell(
+                                  focusColor: Colors.teal,
+                                  highlightColor:Colors.teal,
+
+                                  onTap: ()=> {Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => AddLivraison() ))},
+                                  child: SizedBox(
+                                    height: _height*0.1,
+                                    width: _width*0.4,
+                                    child:  Column(
                                       children:  [
                                         const Icon(Icons.post_add,color: Colors.grey,size: 35,),
                                         const SizedBox(height: 10,),
@@ -151,6 +187,8 @@ class _FactureState extends State<Facture> {
                                       ],
                                     ),
                                   ),
+                                ),
+                              ),
                             ],
                           )
                         ],),

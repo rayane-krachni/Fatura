@@ -2,17 +2,16 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:freelance/Screens/HomePage.dart';
 import 'package:freelance/Theme/Theme.dart';
-import 'package:freelance/signup.dart';
 
 
-class Authentification extends StatefulWidget {
-  const Authentification({Key? key}) : super(key: key);
+class SignUp extends StatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
-  State<Authentification> createState() => _AuthentificationState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _AuthentificationState extends State<Authentification> {
+class _SignUpState extends State<SignUp> {
 
 
   @override
@@ -26,19 +25,19 @@ class _AuthentificationState extends State<Authentification> {
             padding: const EdgeInsets.all(15.0),
             child: Column(
               children: [
-                SizedBox(height: _height*0.15,),
+                SizedBox(height: _height*0.1,),
 
                 Container(
                   width: _width,
                   height: _height*0.3,
                   decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/login.png')
-                    )
+                      image: DecorationImage(
+                          image: AssetImage('assets/images/signin.png')
+                      )
                   ),
                 ),
                 SizedBox(height: 20,),
-                Text('Connexion',style: ThemeStyle.initialtitle,),
+                Text('Inscription',style: ThemeStyle.initialtitle,),
                 SizedBox(height: 20,),
                 Padding(
                   padding: const EdgeInsets.only(top: 7.0),
@@ -65,7 +64,31 @@ class _AuthentificationState extends State<Authentification> {
                         ),
                       )),
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 7.0),
+                  child: Container(
 
+                      height: _height*0.062,
+                      width: double.infinity,
+                      decoration:  BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                          boxShadow: [BoxShadow(
+                              blurRadius:5 ,
+                              color: Colors.grey.withOpacity(0.2),
+                              offset: Offset(0,3)
+                          )]
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top:1.0,left: 15,right: 5,bottom:12),
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                              hintText: "Nom Du chaufeur",
+                              suffixIcon: Icon(Icons.code,size: 18,)
+                          ),
+                        ),
+                      )),
+                ),
                 Padding(
                   padding: const EdgeInsets.only(top: 7.0),
                   child: Container(
@@ -115,15 +138,10 @@ class _AuthentificationState extends State<Authentification> {
                       },
 
                       style: ElevatedButton.styleFrom(primary: Colors.transparent, shadowColor: Colors.transparent),
-                      child: Center(child: Text("Connecter",style: ThemeStyle.buttontext,))
+                      child: Center(child: Text("Registrer",style: ThemeStyle.buttontext,))
                   ),
                 ),
                 SizedBox(height: 20,),
-                FlatButton(onPressed:()=>{
-                 Navigator.of(context).push(MaterialPageRoute(builder: (_)=>const SignUp()))
-
-                }, child: Text("je n'ai pas un compte ?"))
-
               ],
             ),
           ),
