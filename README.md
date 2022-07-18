@@ -1,8 +1,8 @@
-# Invoice Application
+# Envoice Application
 
 A new Flutter project.
 
-## Getting Started
+## Application Description
 
 This project is a starting point for a Flutter application.
 
