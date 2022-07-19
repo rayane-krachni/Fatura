@@ -11,6 +11,33 @@ class Facture_Manage extends ChangeNotifier {
     _loadingfacture = value;
     notifyListeners();
   }
+  bool _loadcproduitpdf=false;
+
+  bool get loadcproduitpdf =>  _loadcproduitpdf;
+
+  set loadcproduitpdf(bool value){
+    _loadcproduitpdf = value;
+    notifyListeners();
+  }
+
+  bool _loadclientpdf=false;
+
+  bool get loadclientpdf =>  _loadclientpdf;
+
+  set loadclientpdf(bool value){
+    _loadclientpdf = value;
+    notifyListeners();
+  }
+
+  bool _loadfournisspdf=false;
+
+  bool get loadfournisspdf =>  _loadfournisspdf;
+
+  set loadfournisspdf(bool value){
+    _loadfournisspdf = value;
+    notifyListeners();
+  }
+
 
   bool _loadingclient=false;
 

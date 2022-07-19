@@ -59,8 +59,8 @@ class _AuthentificationState extends State<Authentification> {
                         padding: const EdgeInsets.only(top:1.0,left: 15,right: 5,bottom:12),
                         child: TextFormField(
                           decoration: InputDecoration(
-                              hintText: "Nom Du chaufeur",
-                              suffixIcon: Icon(Icons.code,size: 18,)
+                              hintText: "Nom d'utilisateur",
+                              suffixIcon: Icon(Icons.person,size: 18,)
                           ),
                         ),
                       )),
@@ -85,7 +85,7 @@ class _AuthentificationState extends State<Authentification> {
                         padding: const EdgeInsets.only(top:1.0,left: 15,right: 5,bottom:12),
                         child: TextFormField(
                           decoration: InputDecoration(
-                              hintText: "Nom Du chaufeur",
+                              hintText: "Mot de pass",
                               suffixIcon: Icon(Icons.code,size: 18,)
                           ),
                         ),
@@ -120,7 +120,7 @@ class _AuthentificationState extends State<Authentification> {
                 ),
                 SizedBox(height: 20,),
                 FlatButton(onPressed:()=>{
-                 Navigator.of(context).push(MaterialPageRoute(builder: (_)=>const SignUp()))
+                 Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>const SignUp()))
 
                 }, child: Text("je n'ai pas un compte ?"))
 

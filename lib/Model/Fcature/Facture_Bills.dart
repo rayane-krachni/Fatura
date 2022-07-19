@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class FactureBills_Model extends ChangeNotifier{
   final int? id;
-  final int? num_facture;
+  final String? num_facture;
 
 
 

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:freelance/Model/BonLivraisson_Model.dart';
+import 'package:freelance/Querries/BonLivraison_Session.dart';
+import 'package:freelance/Screens/HomePage.dart';
+import 'package:freelance/widgets/Success_Diag.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BillsItem extends StatefulWidget {
@@ -11,6 +14,19 @@ class BillsItem extends StatefulWidget {
 }
 
 class _BillsItemState extends State<BillsItem> {
+  void Delete_Bills()async {
+
+    int insrtcleint=   await BonLivraisonSession.DeleteBills(widget.bills!.id!);
+    if( insrtcleint!= 0)
+    {
+      showDialog(context: context, builder:(_)=>Success_Dialog(mytext: "Client done",mywidgets :()=> HomePage()));
+    }
+    else {
+      print('results $insrtcleint');
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     double _height=MediaQuery.of(context).size.height;
@@ -39,7 +55,9 @@ class _BillsItemState extends State<BillsItem> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Icon(Icons.more_vert)
+                        IconButton(onPressed: (){
+                         Delete_Bills();
+                        }, icon: Icon(Icons.more_vert,size: 30,color: Colors.teal,))
                       ],
                     ),
                     const CircleAvatar(

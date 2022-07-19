@@ -14,6 +14,13 @@ class ProduitSession{
     return response;
 
   }
+  static  Future<int> DeleteProduit(int idProduit) async{
+    int response = await mysqldb.deleteDatabase('DELETE  FROM "produit" WHERE "id"=$idProduit');
+    print ("delte prod response ====");
+    print ("response $response");
+    return response;
+
+  }
 
   static Future<List<Produit_Model>> GetAllProducts() async{
 
@@ -23,6 +30,18 @@ class ProduitSession{
 
     return listProduit;
   }
+
+
+  static Future<List<Produit_Model>> GetAllProductsbyid(int id ) async{
+
+    var response= await mysqldb.readDatabase('SELECT * FROM "produit" WHERE "id"=$id ');
+
+    List<Produit_Model> listProduitid=(response as List).map((e) => Produit_Model.formMap(e)).toList();
+    print("msg msg from produitttsession");
+    return listProduitid;
+  }
+
+
 
   static Future<List<ProduitFacture_Model>>   getProduitName() async {
     var response2= await mysqldb.readDatabase('SELECT "id","name"  FROM "produit" ' );

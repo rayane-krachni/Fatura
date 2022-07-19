@@ -20,6 +20,8 @@ class Home_Client extends StatefulWidget {
 class _Home_ClientState extends State<Home_Client> {
   Client_Manage manager= Client_Manage();
   List<Client_Model>? mmap;
+  List<Client_Model>? FilterClient;
+  TextEditingController? searchkey = TextEditingController();
 
   void getClients() async {
     List<Client_Model> res= await ClientSession.getAllData();
@@ -78,7 +80,20 @@ class _Home_ClientState extends State<Home_Client> {
                         )]
                     ),
                     child: TextFormField(
+                      controller: searchkey,
+                      onChanged: (value){
+                       value=value.toLowerCase();
+                       setState(() {
+                         FilterClient=mmap!.where((c) {
+
+                           var searchclient=c.fullname!.toLowerCase();
+                           return searchclient.contains(value);
+
+                         } ).toList();
+                       });
+                      },
                       decoration:  InputDecoration(
+
                         border: InputBorder.none,
                         focusedBorder: InputBorder.none,
                         enabledBorder: InputBorder.none,
@@ -116,10 +131,10 @@ class _Home_ClientState extends State<Home_Client> {
                             MaterialPageRoute(builder: (context) => Add_client(),)
                             )))
                           : ListView.builder(
-                             itemCount: mmap?.length,
+                             itemCount:searchkey!.text.isNotEmpty ? FilterClient!.length: mmap?.length,
                                itemBuilder:(BuildContext context,int i){
 
-                               return ClientItem(client: mmap?[i],);
+                               return ClientItem(client:searchkey!.text.isNotEmpty ? FilterClient![i]: mmap?[i],);
                                 } ,
                               )
                 )

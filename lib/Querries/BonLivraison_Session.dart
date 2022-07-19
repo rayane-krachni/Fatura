@@ -16,12 +16,21 @@ class BonLivraisonSession{
 
   }
 
+  static  Future<int> DeleteBills(int idBills) async{
+    int response = await mysqldb.deleteDatabase('DELETE  FROM "bon_livraison" WHERE "id"=$idBills');
+    print ("delte prod response ====");
+    print ("response $response");
+    return response;
+
+  }
+
   static Future <List<BonLivraison_Model>>   getbills() async {
     List<Map> response= await mysqldb.readDatabase("SELECT * FROM 'bon_livraison'" );
     List<BonLivraison_Model> list = (response as List).map((c) => BonLivraison_Model.fromMap(c)).toList();
     return list;
 
   }
+
 
 
 

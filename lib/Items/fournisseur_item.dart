@@ -1,8 +1,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:freelance/Model/Fournisseur/Fournisseur_Model.dart';
+import 'package:freelance/Querries/Fournisseur_Session.dart';
 import 'package:freelance/Screens/Details/Detail_Fournisseur.dart';
+import 'package:freelance/widgets/Success_Diag.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../Screens/HomePage.dart';
 
 class FournisseurItem extends StatefulWidget {
   Fournisseur_Model? fournisseur;
@@ -13,6 +17,18 @@ class FournisseurItem extends StatefulWidget {
 }
 
 class _FournisseurItemState extends State<FournisseurItem> {
+  void Delete_Fourniseur()async {
+
+    int insrtcleint=   await FournisseurSession.DeleteFournisseur(widget.fournisseur!.id!);
+    if( insrtcleint!= 0)
+    {
+      showDialog(context: context, builder:(_)=>Success_Dialog(mytext: "Client done",mywidgets :()=> HomePage()));
+    }
+    else {
+      print('results $insrtcleint');
+    }
+
+  }
   @override
   Widget build(BuildContext context) {
     double _width=MediaQuery.of(context).size.width;
@@ -64,7 +80,9 @@ class _FournisseurItemState extends State<FournisseurItem> {
 
                     ,],
                 ),
-                const Icon(Icons.more_vert,size: 30,color: Colors.teal,)
+                IconButton(onPressed: (){
+                  Delete_Fourniseur();
+                }, icon: Icon(Icons.more_vert,size: 30,color: Colors.teal,))
 
               ],
             ),

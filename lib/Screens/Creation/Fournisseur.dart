@@ -374,7 +374,19 @@ class _AddFournisseursState extends State<AddFournisseurs> {
 
                 child: ElevatedButton(
                     onPressed: () {
-                      Insert_Fournisseur();
+                     if  (  name.isEmpty||
+                                company.isEmpty||
+                                Address.isEmpty||
+                                willaya.isEmpty||
+                                activite.isEmpty||
+                                nic.isEmpty||
+                                nif.isEmpty||
+                                art.isEmpty||
+                                rc.isEmpty||
+                                phone==''){
+                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Empty fields ')));
+                     }
+                      return Insert_Fournisseur();
                     },
 
                     style: ElevatedButton.styleFrom(primary: Colors.transparent, shadowColor: Colors.transparent),

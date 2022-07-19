@@ -238,7 +238,19 @@ class _ProduitState extends State<AddProduit> {
 
                 child: ElevatedButton(
                     onPressed: () {
-                      Insert_Produit();
+                      if(
+                      name.isEmpty||
+                      prix==''||
+                      code.isEmpty||
+                      tva==''||
+                      stock==''
+                      )
+                      {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Empty fields ')));
+
+                      }
+                      else{Insert_Produit();}
+
                     },
 
                     style: ElevatedButton.styleFrom(primary: Colors.transparent, shadowColor: Colors.transparent),

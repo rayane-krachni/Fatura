@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:freelance/Model/Produit/Produit_Model.dart';
+import 'package:freelance/Querries/Produit_Session.dart';
 import 'package:freelance/Screens/Details/Detai_lProduits.dart';
+import 'package:freelance/Screens/HomePage.dart';
+import 'package:freelance/widgets/Success_Diag.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProduitsItem extends StatefulWidget {
@@ -12,7 +15,18 @@ class ProduitsItem extends StatefulWidget {
 }
 
 class _ProduitsItemState extends State<ProduitsItem> {
+  void Delete_Product()async {
 
+    int insrtcleint=   await ProduitSession.DeleteProduit(widget.produit!.id!);
+    if( insrtcleint!= 0)
+    {
+      showDialog(context: context, builder:(_)=>Success_Dialog(mytext: "Client done",mywidgets :()=> HomePage()));
+    }
+    else {
+      print('results $insrtcleint');
+    }
+
+  }
   @override
   Widget build(BuildContext context) {
     double _width=MediaQuery.of(context).size.width;
@@ -48,7 +62,9 @@ class _ProduitsItemState extends State<ProduitsItem> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Icon(Icons.more_vert)
+                          IconButton(onPressed: (){
+                            Delete_Product();
+                          }, icon: Icon(Icons.more_vert,size: 30,color: Colors.teal,))
                         ],
                       ),
                       const CircleAvatar(

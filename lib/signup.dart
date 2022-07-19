@@ -58,8 +58,8 @@ class _SignUpState extends State<SignUp> {
                         padding: const EdgeInsets.only(top:1.0,left: 15,right: 5,bottom:12),
                         child: TextFormField(
                           decoration: InputDecoration(
-                              hintText: "Nom Du chaufeur",
-                              suffixIcon: Icon(Icons.code,size: 18,)
+                              hintText: "Nom ",
+                              suffixIcon: Icon(Icons.person,size: 18,)
                           ),
                         ),
                       )),
@@ -83,8 +83,8 @@ class _SignUpState extends State<SignUp> {
                         padding: const EdgeInsets.only(top:1.0,left: 15,right: 5,bottom:12),
                         child: TextFormField(
                           decoration: InputDecoration(
-                              hintText: "Nom Du chaufeur",
-                              suffixIcon: Icon(Icons.code,size: 18,)
+                              hintText: "Tele phone ",
+                              suffixIcon: Icon(Icons.phone,size: 18,)
                           ),
                         ),
                       )),
@@ -108,7 +108,7 @@ class _SignUpState extends State<SignUp> {
                         padding: const EdgeInsets.only(top:1.0,left: 15,right: 5,bottom:12),
                         child: TextFormField(
                           decoration: InputDecoration(
-                              hintText: "Nom Du chaufeur",
+                              hintText: "mot de pass",
                               suffixIcon: Icon(Icons.code,size: 18,)
                           ),
                         ),

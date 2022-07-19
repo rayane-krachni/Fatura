@@ -28,7 +28,7 @@ class AddFacture extends StatefulWidget {
 class _AddFactureState extends State<AddFacture> {
   Facture_Manage managerdata =Facture_Manage();
   List<String> unite=['g','Kg','Q','T'];
-  TextEditingController ? fournisseur_control,client_control,facture_control,date_control,produit_control,quantite_control,remise_control;
+  TextEditingController ? timber_controller,fournisseur_control,client_control,facture_control,date_control,produit_control,quantite_control,remise_control;
   List<ClientFcture_Model> ? clientlist;
 
   List<TextEditingController>? produitsquantite =[] ;
@@ -90,15 +90,17 @@ class _AddFactureState extends State<AddFacture> {
     produit_control= new TextEditingController();
     quantite_control= new TextEditingController();
     remise_control= new TextEditingController();
+    timber_controller = new TextEditingController();
     //produitsquantite= new TextEditingController() as List<TextEditingController>?;
     //List<TextEditingController> produitsquantite = List.generate(74, (i) => TextEditingController());
 
     super.initState();
 
   }
-  int get num_facture => int.parse(facture_control!.text);
+  String get num_facture => facture_control!.text;
   int get id_client => int.parse(client_control!.text);
   int get id_fournisseur =>int.parse(fournisseur_control!.text);
+  int get timber =>int.parse(timber_controller!.text);
   String get date => date_control!.text;
   String get id_produit => produit_control!.text;
   String get quantite => quantite_control!.text;
@@ -116,8 +118,10 @@ class _AddFactureState extends State<AddFacture> {
         num_facture, date,
         getProductsids(controllerids)! ,
         getProductsQte(produitsquantite!)!,
-        getProductsremise(produitsremise!)!,
-        getProductsunite(controllerunite!)!);
+        'getProductsremise(produitsremise!)!',
+        getProductsunite(controllerunite!)!,
+        timber
+        );
     if( insrtinvoice!= 0)
     {
       showDialog(context: context, builder:(_)=>Success_Dialog(mytext: "Client done",mywidgets:()=> HomePage()));
@@ -338,7 +342,35 @@ class _AddFactureState extends State<AddFacture> {
                                       ),
                                     )),
                               ),
-                              SizedBox(height: 10,),
+                             // SizedBox(height: 10,),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 7.0),
+                                child: Container(
+
+                                    height: _height*0.062,
+                                    width: double.infinity,
+                                    decoration:  BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                                        boxShadow: [BoxShadow(
+                                            blurRadius:5 ,
+                                            color: Colors.grey.withOpacity(0.2),
+                                            offset: Offset(0,3)
+                                        )]
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(top:1.0,left: 15,right: 5,bottom:12),
+                                      child: TextFormField(
+                                        controller: timber_controller,
+                                        keyboardType: TextInputType.number,
+                                        decoration: const InputDecoration(
+                                            hintText: "Timber",
+                                            suffixIcon: Icon(Icons.add_location,size: 18,)
+                                        ),
+                                      ),
+                                    )),
+                              ),
+                              const SizedBox(height: 10,),
                               Align(
                                   alignment: Alignment.topLeft,
                                   child: Text("les information du produit",style: ThemeStyle.secondtitle,)),
@@ -354,7 +386,10 @@ class _AddFactureState extends State<AddFacture> {
                                       produitsquantite!.add(new TextEditingController());
                                      return   Column(
                                         children: [
-                                        Text('produits $i'),
+                                          const  SizedBox(height: 10,),
+                                        Align(
+                                            alignment: Alignment.topLeft,
+                                            child: Text('Produit $i',style: ThemeStyle.secondtitle)),
                                         Padding(
                                           padding: const EdgeInsets.only(top: 7.0),
                                           child: Container(
@@ -436,6 +471,7 @@ class _AddFactureState extends State<AddFacture> {
                                                       padding: const EdgeInsets.only(top:1.0,left: 15,right: 5,bottom:12),
                                                       child: TextFormField(
                                                         controller: produitsquantite![i],
+                                                        keyboardType: TextInputType.number,
                                                         decoration: const InputDecoration(
                                                             hintText: "Quantite",
                                                             //suffixIcon: Icon(Icons.code,size: 18,)
@@ -500,7 +536,7 @@ class _AddFactureState extends State<AddFacture> {
                                             ),
                                           ),
                                         ),
-                                        Padding(
+                                      /*  Padding(
                                           padding: const EdgeInsets.only(top: 7.0),
                                           child: Container(
 
@@ -525,7 +561,7 @@ class _AddFactureState extends State<AddFacture> {
                                                   ),
                                                 ),
                                               )),
-                                        ),
+                                        ),*/
                                         SizedBox(height: 10,),
                                       ],
                                     ) ;
@@ -567,6 +603,7 @@ class _AddFactureState extends State<AddFacture> {
 
                       child: ElevatedButton(
                           onPressed: () {
+
                             Insert_envoice();
                           },
 
@@ -695,9 +732,9 @@ class _AddFactureState extends State<AddFacture> {
    }
 
 
-    if (myqte != "" && myqte.length > 0) {
+   /* if (myqte != "" && myqte.length > 0) {
       myqte = myqte.substring(0, myqte.length - 1);
-    }
+    }*/
     print('mmmm $myqte');
     return myqte;
 

@@ -93,12 +93,13 @@ class  SqlDb{
       "id" INTEGER PRIMARY KEY AUTOINCREMENT, 
       "id_fournisseur" INTEGER,
       "id_client" INTEGER,
-      "num_facture" INTEGER  ,
+      "num_facture" TEXT  ,
       "date" TEXT,
       "id_produit" TEXT,
       "quantite" TEXT,
       "remise" TEXT,
-      "unite" TEXT
+      "unite" TEXT,
+      "timber" INTEGER
       )''');
 
 

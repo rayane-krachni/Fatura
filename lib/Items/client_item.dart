@@ -1,7 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:freelance/Model/Client/Client_Model.dart';
+import 'package:freelance/Querries/Client_session.dart';
 import 'package:freelance/Screens/Details/Detail_Client.dart';
+import 'package:freelance/Screens/HomePage.dart';
+import 'package:freelance/widgets/Success_Diag.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ClientItem extends StatefulWidget {
@@ -14,6 +17,18 @@ class ClientItem extends StatefulWidget {
 }
 
 class _ClientItemState extends State<ClientItem> {
+  void Delete_Client()async {
+
+    int insrtcleint=   await ClientSession.DeleteClient(widget.client!.id!);
+    if( insrtcleint!= 0)
+    {
+      showDialog(context: context, builder:(_)=>Success_Dialog(mytext: "Client done",mywidgets :()=> HomePage()));
+    }
+    else {
+      print('results $insrtcleint');
+    }
+
+  }
   @override
   Widget build(BuildContext context) {
     double _width=MediaQuery.of(context).size.width;
@@ -63,7 +78,10 @@ class _ClientItemState extends State<ClientItem> {
 
                     ,],
                 ),
-                Icon(Icons.more_vert,size: 30,color: Colors.teal,)
+                IconButton(onPressed: (){
+                  Delete_Client();
+                 }, icon: Icon(Icons.more_vert,size: 30,color: Colors.teal,))
+
 
               ],
             ),

@@ -20,6 +20,8 @@ class Fournisseur extends StatefulWidget {
 class _FournisseurState extends State<Fournisseur> {
   Fournisseur_Manage fournisseur_manager= Fournisseur_Manage();
   List<Fournisseur_Model>? fournisseurs;
+  List<Fournisseur_Model>? FilterFournisseur;
+  TextEditingController? searchkey = TextEditingController();
   void getFournisseur() async{
     List<Fournisseur_Model> map = await FournisseurSession.getAll();
     fournisseurs=map;
@@ -40,7 +42,6 @@ class _FournisseurState extends State<Fournisseur> {
     double _height=MediaQuery.of(context).size.height;
     return ChangeNotifierProvider.value(
       value: fournisseur_manager,
-
       child: Consumer<Fournisseur_Manage>(
         builder: (context,fournisseurmanager,_){
           return Padding(
@@ -77,6 +78,18 @@ class _FournisseurState extends State<Fournisseur> {
                         )]
                     ),
                     child: TextFormField(
+                      controller: searchkey,
+                      onChanged: (value){
+                        value=value.toLowerCase();
+                        setState(() {
+                          FilterFournisseur=fournisseurs!.where((c) {
+
+                            var searchclient=c.fullname!.toLowerCase();
+                            return searchclient.contains(value);
+
+                          } ).toList();
+                        });
+                      },
                       decoration:  InputDecoration(
                         border: InputBorder.none,
                         focusedBorder: InputBorder.none,
@@ -112,9 +125,9 @@ class _FournisseurState extends State<Fournisseur> {
 
                       : ListView.builder(
 
-                        itemCount: fournisseurs!.length,
+                        itemCount:searchkey!.text.isNotEmpty ? FilterFournisseur!.length: fournisseurs!.length,
                         itemBuilder:(BuildContext context,int index){
-                        return FournisseurItem(fournisseur: fournisseurs?[index],);
+                        return FournisseurItem(fournisseur:searchkey!.text.isNotEmpty ? FilterFournisseur![index]: fournisseurs?[index],);
                     } ,
                   ),
                 )

@@ -22,9 +22,7 @@ class FactureDetailExported extends StatefulWidget {
 
 class _FactureDetailExportedState extends State<FactureDetailExported> {
   Facture_Manage managerdata =Facture_Manage();
-  List<Client_Model> ? clientlist;
-  List<Fournisseur_Model> ? fournisseurlist;
-  void getlistclient() async
+  List<Client_Model> ? clientlist;  void getlistclient() async
   {
     List<Client_Model> myclientlist= await ClientSession.getClientbyid(widget.facture!.id_client!);
     print('mmm $myclientlist');
@@ -32,6 +30,8 @@ class _FactureDetailExportedState extends State<FactureDetailExported> {
     managerdata.loadingclient=true;
     print('ggg ${clientlist![0]}');
   }
+  List<Fournisseur_Model> ? fournisseurlist;
+
 
   void getlistfournisseur() async
   {

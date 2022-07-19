@@ -59,7 +59,7 @@ class _Success_DialogState extends State<Success_Dialog> {
                        Navigator.pop(context);
                      },
                      child: Container(
-                       decoration: BoxDecoration(
+                       decoration: const BoxDecoration(
                          color: Colors.teal,
                          borderRadius: BorderRadius.all(Radius.circular(50)),
                        ),

@@ -18,6 +18,8 @@ class Products extends StatefulWidget {
 class _ProductsState extends State<Products> {
   Produit_Manage ProduitManager= Produit_Manage();
   List<Produit_Model>? products;
+  List<Produit_Model>? FiltreProduit;
+  TextEditingController? searchkey = TextEditingController();
   void getProduits() async{
     List<Produit_Model> map=await ProduitSession.GetAllProducts();
     products=map;
@@ -72,6 +74,18 @@ class _ProductsState extends State<Products> {
                           )]
                       ),
                       child: TextFormField(
+                        controller: searchkey,
+                        onChanged: (value){
+                          value=value.toLowerCase();
+                          setState(() {
+                            FiltreProduit=products!.where((c) {
+
+                              var searchclient=c.name!.toLowerCase();
+                              return searchclient.contains(value);
+
+                            } ).toList();
+                          });
+                        },
                         decoration:  InputDecoration(
                           border: InputBorder.none,
                           focusedBorder: InputBorder.none,
@@ -101,9 +115,9 @@ class _ProductsState extends State<Products> {
                         : products?.isNotEmpty ?? true ?
                     GridView.builder(
                       shrinkWrap: true,
-                      itemCount: products!.length,
+                      itemCount:searchkey!.text.isNotEmpty ? FiltreProduit!.length:products!.length,
                       itemBuilder:(BuildContext context,int i){
-                        return ProduitsItem(produit: products![i],);
+                        return ProduitsItem(produit:searchkey!.text.isNotEmpty ? FiltreProduit![i]: products![i],);
                       },
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
