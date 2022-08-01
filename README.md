@@ -27,3 +27,6 @@ The main aim of this project is to Facilate the calculation and generate envoice
 
 
 ![Group 1(1)](https://user-images.githubusercontent.com/87647184/179611030-77131dcc-df06-4753-b7d8-c58a386dd2db.png)
+![Slide 16_9 - 2](https://user-images.githubusercontent.com/87647184/182099614-3c9feb06-0ae5-4a6b-a24e-e93a230f169c.png)
+
+
