@@ -24,6 +24,7 @@ The main aim of this project is to Facilate the calculation and generate envoice
 ### Main Screens
 
 ![smartmockups_l5ron3lp](https://user-images.githubusercontent.com/87647184/179603112-6486a329-6f7d-4b67-9e02-03cde46e901f.jpg)
-![Slide 16_9 - 2](https://user-images.githubusercontent.com/87647184/182099614-3c9feb06-0ae5-4a6b-a24e-e93a230f169c.png)
+
+![Slide 16_9 - 2(1)](https://user-images.githubusercontent.com/87647184/182099991-de00f4e6-190d-4b00-b2db-d7cbae7dbec2.png)
 
 
