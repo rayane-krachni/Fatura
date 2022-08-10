@@ -94,10 +94,10 @@ class _AddLivraisonState extends State<AddLivraison> {
 
 
   void Insert_Bills() async {
-    print('++++++ ${EnvoicetoId(facturevalue!, facturelist!)!}');
+   // print('++++++ ${EnvoicetoId(facturevalue!, facturelist!)!}');
 
     int insrtbills=   await BonLivraisonSession.Addbills(FournisseurtoId(fournisseurvalue!, fournisseurlist!)!, ClienttoId(clientvalue!, clientlist!)!, EnvoicetoId(facturevalue!, facturelist!)!, date, transport, matricule, chauffeur, mode_pay);
-    print('insrtbills $insrtbills');
+   // print('insrtbills $insrtbills');
     if( Controller.isNumiric(insrtbills.toString()))
     {
       showDialog(context: context, builder:(_)=>Success_Dialog(mytext: "Client done",mywidgets: ()=>HomePage()));
@@ -430,6 +430,7 @@ class _AddLivraisonState extends State<AddLivraison> {
                                       child: Padding(
                                         padding: const EdgeInsets.only(top:1.0,left: 15,right: 5,bottom:12),
                                         child: TextFormField(
+                                          controller: chauffeur_control,
                                           decoration: InputDecoration(
                                               hintText: "Nom Du chaufeur",
                                               suffixIcon: Icon(Icons.code,size: 18,)

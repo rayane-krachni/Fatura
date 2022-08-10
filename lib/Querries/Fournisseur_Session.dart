@@ -19,6 +19,12 @@ class FournisseurSession{
     return response;
 
   }
+    static  Future<int> EditFournisseur(int id,String name,String company,String Address,String willaya,String activite,String nic,String nif,String art,String rc,int phone,) async{
+    int response = await mysqldb.updateDatabase("UPDATE 'fournisseur' SET fullname = ?,address=?,company=?,willaya=?,activite=?,nif=?,nic=?,art=?,rc=?,telephone=? WHERE id = ?",[name,Address,company,willaya,activite,nif,nic,art,rc,phone,id]);
+    return response;
+
+  }
+
 
   static Future<List<FournisseurFcture_Model>> getFournisseursName() async {
     var response= await mysqldb.readDatabase('SELECT "id","fullname"  FROM "fournisseur" ' );

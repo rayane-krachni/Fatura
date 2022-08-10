@@ -1,6 +1,7 @@
 import 'package:freelance/Model/Produit/Produit_Facture.dart';
 import 'package:freelance/Model/Produit/Produit_Model.dart';
 import 'package:freelance/Querries/AppConfigue.dart';
+import 'package:freelance/Screens/Editting/produit_edit.dart';
 
 
 
@@ -11,6 +12,12 @@ class ProduitSession{
     int response = await mysqldb.insertDatabase("INSERT INTO 'produit' (name,tva,prix,code,stock) VALUES (?,?,?,?,?)",[name,tva,prix,code,stock]);
     print ("response ====");
     print ("response $response");
+    return response;
+
+  }
+
+  static  Future<int> Edit_Produit(int id,String name,int tva,double prix,String code,int stock) async{
+    int response = await mysqldb.updateDatabase("UPDATE 'produit' SET name = ?,tva=?,prix=?,code=?,stock=? WHERE id = ?",[name,tva,prix,code,stock,id]);
     return response;
 
   }

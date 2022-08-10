@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:freelance/Screens/HomePage.dart';
-import 'package:freelance/authentification.dart';
+import 'package:freelance/Screens/auth/authentification.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SlpashScreen extends StatefulWidget {

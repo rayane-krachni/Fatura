@@ -119,9 +119,9 @@ class  SqlDb{
     return response;
 
   }
-  updateDatabase(String sql) async {
+  updateDatabase(String sql ,List<Object> list) async {
     Database? mydb= await db;
-    int response=await mydb!.rawUpdate(sql);
+    int response=await mydb!.rawUpdate(sql,list);
     return response;
 
   }

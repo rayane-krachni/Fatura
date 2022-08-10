@@ -1,8 +1,8 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:freelance/Screens/HomePage.dart';
+import 'package:freelance/Screens/auth/signup.dart';
 import 'package:freelance/Theme/Theme.dart';
-import 'package:freelance/signup.dart';
+
 
 
 class Authentification extends StatefulWidget {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freelance/Model/Client/Client_Model.dart';
 import 'package:freelance/Querries/Client_session.dart';
 import 'package:freelance/Screens/HomePage.dart';
 import 'package:freelance/Screens/Home_Client.dart';
@@ -6,14 +7,15 @@ import 'package:freelance/widgets/Success_Diag.dart';
 
 import '../../Theme/Theme.dart';
 
-class Add_client extends StatefulWidget {
-  const Add_client({Key? key}) : super(key: key);
+class Edit_client extends StatefulWidget {
+  Client_Model? client;
+  Edit_client({Key? key,required this.client}) : super(key: key);
 
   @override
-  State<Add_client> createState() => _Add_clientState();
+  State<Edit_client> createState() => _Edit_clientState();
 }
 
-class _Add_clientState extends State<Add_client> {
+class _Edit_clientState extends State<Edit_client> {
   TextEditingController ? name_control,address_control,willaya_control,activity_control,nic_control,nif_control,art_control,rc_control,phone_control;
   bool _validatename= false;
   Color First=Colors.black12;
@@ -22,15 +24,15 @@ class _Add_clientState extends State<Add_client> {
   @override
   void initState() {
     // TODO: implement initState
-    name_control= new TextEditingController();
-    address_control= new TextEditingController();
-    willaya_control= new TextEditingController();
-    activity_control= new TextEditingController();
-    nic_control= new TextEditingController();
-    nif_control= new TextEditingController();
-    art_control= new TextEditingController();
-    rc_control= new TextEditingController();
-    phone_control= new TextEditingController();
+    name_control= TextEditingController(text: widget.client!.fullname!);
+    address_control= TextEditingController(text: widget.client!.address!);
+    willaya_control= TextEditingController(text: widget.client!.willaya!);
+    activity_control=TextEditingController(text: widget.client!.activite!);
+    nic_control= TextEditingController(text: widget.client!.nic!);
+    nif_control=TextEditingController(text: widget.client!.nif!);
+    art_control=TextEditingController(text: widget.client!.art!);
+    rc_control= TextEditingController(text: widget.client!.rc!);
+    phone_control=TextEditingController(text: widget.client!.telephone!.toString());
   }
   String get name => name_control!.text;
   String get Address => address_control!.text;
@@ -42,12 +44,12 @@ class _Add_clientState extends State<Add_client> {
   String get rc => rc_control!.text;
   int get phone => int.parse(phone_control!.text);
 
-  void Insert_Client()async {
+  void Update_Client()async {
 
-    int insrtcleint=   await ClientSession.AddClient( name,Address, willaya,  activite,  nic,  nif,  art,  rc,  phone);
+    int insrtcleint=   await ClientSession.EditClient(widget.client!.id!, name,Address, willaya,  activite,  nic,  nif,  art,  rc,  phone);
     if( insrtcleint!= 0)
     {
-      showDialog(context: context, builder:(_)=>Success_Dialog(mytext: "Client done",mywidgets :()=> HomePage()));
+      showDialog(context: context, builder:(_)=>Success_Dialog(mytext: "les informations sont bien sauvegardés",mywidgets :()=> HomePage()));
     }
     else {
       print('results $insrtcleint');
@@ -55,7 +57,7 @@ class _Add_clientState extends State<Add_client> {
 
   }
 
- final formkey =GlobalKey<FormState>();
+  final formkey =GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +78,7 @@ class _Add_clientState extends State<Add_client> {
             children: [
               Align(
                   alignment: Alignment.topLeft,
-                  child: Text("Ajouter un  client",style: ThemeStyle.addtitles,)),
+                  child: Text("AModifier Les Informations",style: ThemeStyle.addtitles,)),
               const SizedBox(height: 5,),
               Align(
 
@@ -84,7 +86,7 @@ class _Add_clientState extends State<Add_client> {
                   child: Text("Svp Remplir tous les champs necessaire",style: ThemeStyle.secondtitle,)),
               const SizedBox(height: 10,),
               Form(
-                key: formkey,
+                  key: formkey,
                   child: Column(
                     children: [
 
@@ -115,7 +117,7 @@ class _Add_clientState extends State<Add_client> {
                                   return null;
                                 },
                                 decoration: const InputDecoration(
-                                 // errorText: (name_control.text.isEmpty) ?? true ? 'cant be  nuull': null,
+                                  // errorText: (name_control.text.isEmpty) ?? true ? 'cant be  nuull': null,
                                   hintText: "Nom",
                                   suffixIcon:  Icon(Icons.person,size: 18,),
                                   errorBorder: InputBorder.none,
@@ -178,17 +180,17 @@ class _Add_clientState extends State<Add_client> {
                               padding: const EdgeInsets.only(top:1.0,left: 15,right: 5,bottom:12),
                               child: TextFormField(
                                 controller: address_control,
-                                  validator: (value){
-                                    if(value==null || value.isEmpty)
-                                    {
-                                      return 'Remplir le champ';
-                                    }
-                                    return null;
-                                  },
+                                validator: (value){
+                                  if(value==null || value.isEmpty)
+                                  {
+                                    return 'Remplir le champ';
+                                  }
+                                  return null;
+                                },
                                 decoration:const InputDecoration(
-                                    hintText: "Addres",
-                                    suffixIcon: Icon(Icons.add_location,size: 18,),
-                                   errorBorder: InputBorder.none,
+                                  hintText: "Addres",
+                                  suffixIcon: Icon(Icons.add_location,size: 18,),
+                                  errorBorder: InputBorder.none,
 
                                 ),
                               ),
@@ -213,16 +215,16 @@ class _Add_clientState extends State<Add_client> {
                               padding: const EdgeInsets.only(top:1.0,left: 15,right: 5,bottom:12),
                               child: TextFormField(
                                 controller: willaya_control,
-                                  validator: (value){
-                                    if(value==null || value.isEmpty)
-                                    {
-                                      return 'Remplir le champ';
-                                    }
-                                    return null;
-                                  },
+                                validator: (value){
+                                  if(value==null || value.isEmpty)
+                                  {
+                                    return 'Remplir le champ';
+                                  }
+                                  return null;
+                                },
                                 decoration: const InputDecoration(
-                                    hintText: "Wilaya",
-                                    suffixIcon: Icon(Icons.location_city,size: 18,),
+                                  hintText: "Wilaya",
+                                  suffixIcon: Icon(Icons.location_city,size: 18,),
                                   errorBorder: InputBorder.none,
                                 ),
                               ),
@@ -247,16 +249,16 @@ class _Add_clientState extends State<Add_client> {
                               padding: const EdgeInsets.only(top:1.0,left: 15,right: 5,bottom:12),
                               child: TextFormField(
                                 controller: nic_control,
-                                  validator: (value){
-                                    if(value==null || value.isEmpty)
-                                    {
-                                      return 'Remplir le champ';
-                                    }
-                                    return null;
-                                  },
+                                validator: (value){
+                                  if(value==null || value.isEmpty)
+                                  {
+                                    return 'Remplir le champ';
+                                  }
+                                  return null;
+                                },
                                 decoration: const InputDecoration(
-                                    hintText: "Nic",
-                                    suffixIcon: Icon(Icons.code,size: 18,),
+                                  hintText: "Nic",
+                                  suffixIcon: Icon(Icons.code,size: 18,),
                                   errorBorder: InputBorder.none,
                                 ),
                               ),
@@ -281,16 +283,16 @@ class _Add_clientState extends State<Add_client> {
                               padding: const EdgeInsets.only(top:1.0,left: 15,right: 5,bottom:12),
                               child: TextFormField(
                                 controller: nif_control,
-                                  validator: (value){
-                                    if(value==null || value.isEmpty)
-                                    {
-                                      return 'Remplir le champ';
-                                    }
-                                    return null;
-                                  },
+                                validator: (value){
+                                  if(value==null || value.isEmpty)
+                                  {
+                                    return 'Remplir le champ';
+                                  }
+                                  return null;
+                                },
                                 decoration: const InputDecoration(
-                                    hintText: "Nif",
-                                    suffixIcon: Icon(Icons.code,size: 18,),
+                                  hintText: "Nif",
+                                  suffixIcon: Icon(Icons.code,size: 18,),
                                   errorBorder: InputBorder.none,
                                 ),
                               ),
@@ -315,16 +317,16 @@ class _Add_clientState extends State<Add_client> {
                               padding: const EdgeInsets.only(top:1.0,left: 15,right: 5,bottom:12),
                               child: TextFormField(
                                 controller: rc_control,
-                                  validator: (value){
-                                    if(value==null || value.isEmpty)
-                                    {
-                                      return 'Remplir le champ';
-                                    }
-                                    return null;
-                                  },
+                                validator: (value){
+                                  if(value==null || value.isEmpty)
+                                  {
+                                    return 'Remplir le champ';
+                                  }
+                                  return null;
+                                },
                                 decoration: const InputDecoration(
-                                    hintText: "Rc",
-                                    suffixIcon: Icon(Icons.code,size: 18,),
+                                  hintText: "Rc",
+                                  suffixIcon: Icon(Icons.code,size: 18,),
                                   errorBorder: InputBorder.none,
                                 ),
                               ),
@@ -349,16 +351,16 @@ class _Add_clientState extends State<Add_client> {
                               padding: const EdgeInsets.only(top:1.0,left: 15,right: 5,bottom:12),
                               child: TextFormField(
                                 controller: art_control,
-                                  validator: (value){
-                                    if(value==null || value.isEmpty)
-                                    {
-                                      return 'Remplir le champ';
-                                    }
-                                    return null;
-                                  },
+                                validator: (value){
+                                  if(value==null || value.isEmpty)
+                                  {
+                                    return 'Remplir le champ';
+                                  }
+                                  return null;
+                                },
                                 decoration: const InputDecoration(
-                                    hintText: "Art",
-                                    suffixIcon: Icon(Icons.code,size: 18,),
+                                  hintText: "Art",
+                                  suffixIcon: Icon(Icons.code,size: 18,),
                                   errorBorder: InputBorder.none,
                                 ),
                               ),
@@ -428,9 +430,9 @@ class _Add_clientState extends State<Add_client> {
                 child: RaisedButton(
                     disabledColor: Colors.grey,
                     color: Colors.transparent ,
-                    onPressed: ()  {
-
-                          if  (  name.isEmpty||
+                    onPressed: () {
+                      if  (
+                          name.isEmpty||
                           Address.isEmpty||
                           willaya.isEmpty||
                           activite.isEmpty||
@@ -439,16 +441,14 @@ class _Add_clientState extends State<Add_client> {
                           art.isEmpty||
                           rc.isEmpty||
                           phone==''){
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Remplir Les Champs Svp ')));
-                          }
-                          return Insert_Client();
-                          },
-                   
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Empty fields ')));
+                      }
+                       return Update_Client();
+                    },
 
-
-                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
                     //style: ElevatedButton.styleFrom(primary: Colors.transparent, shadowColor: Colors.transparent),
-                    child: Center(child: Text("Ajouter",style: ThemeStyle.buttontext,))
+                    child: Center(child: Text("Enregistrer",style: ThemeStyle.buttontext,))
                 ),
               )
 

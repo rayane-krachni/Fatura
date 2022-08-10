@@ -20,6 +20,14 @@ class ClientSession{
     return response;
 
   }
+  static  Future<int> EditClient(int id,String name,String Address,String willaya,String activite,String nic,String nif,String art,String rc,int phone,) async{
+    int response = await mysqldb.updateDatabase(
+        "UPDATE 'client' SET fullname = ?,address=? ,willaya=?,activite=?,nif=?,nic=?,art=?,rc=?,telephone=? WHERE id = ?",[name,Address,willaya,activite,nif,nic,art,rc,phone,id]);
+
+    print ("response $response");
+    return response;
+
+  }
 
   static  Future<int> DeleteClient(int idClient) async{
     int response = await mysqldb.deleteDatabase('DELETE  FROM "client" WHERE "id"=$idClient');

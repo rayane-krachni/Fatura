@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:freelance/Model/Client/Client_Model.dart';
 import 'package:freelance/Theme/Theme.dart';
+import 'package:freelance/widgets/ritch_text.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ClientDetail extends StatefulWidget {
@@ -71,13 +72,13 @@ class _ClientDetailState extends State<ClientDetail> {
 
                         child: CircleAvatar(
                           backgroundImage: AssetImage("assets/images/client.jpg",),
-                          radius: 45,),
+                          radius: 35,),
                       ),
                       Center(
 
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(widget.client!.fullname!,style: GoogleFonts.lato(color: Colors.black,fontSize: 16 , fontWeight: FontWeight.bold ),),
+                          child: Text(widget.client!.fullname!,style: GoogleFonts.lato(color: Colors.black,fontSize: 15 , fontWeight: FontWeight.bold ),),
                         ),
                       ),
 
@@ -88,144 +89,27 @@ class _ClientDetailState extends State<ClientDetail> {
                         indent: 20,
                       ),
                       SizedBox(height: 10,),
-
-                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.person,size: 20,color: Colors.teal,),
-                          SizedBox(width: 10,),
-                          Text('Nom De Client',style: GoogleFonts.lato(color: Colors.black,fontSize:14 , fontWeight: FontWeight.bold ),),
-                        ],
-                      ),
+                       Ritch_Text(title: 'Nom De Client', detail: widget.client!.fullname!, icon: Icons.person),
                       SizedBox(height: 5),
-                      Text(widget.client!.fullname!,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines:2,
-                        style: GoogleFonts.lato(color: Colors.black,fontSize: 14 , fontWeight: FontWeight.normal ),),
+                       Ritch_Text(title: 'Num de Telephone', detail: widget.client!.telephone!.toString(), icon: Icons.phone),
                       SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.person,size: 20,color: Colors.teal,),
-                          SizedBox(width: 10,),
-                          Text('Num de Telephone',style: GoogleFonts.lato(color: Colors.black,fontSize:14 , fontWeight: FontWeight.bold ),),
-                        ],
-                      ),
+                      Ritch_Text(title: 'Address', detail: widget.client!.address!, icon: Icons.person),
                       SizedBox(height: 5),
-                      Text(widget.client!.telephone!.toString(),
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines:2,
-                        style: GoogleFonts.lato(color: Colors.black,fontSize: 14 , fontWeight: FontWeight.normal ),),
+                      Ritch_Text(title: 'Nom De Willaya', detail: widget.client!.willaya!, icon: Icons.person),
                       SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.person,size: 20,color: Colors.teal,),
-                          SizedBox(width: 10,),
-                          Text('Address',style: GoogleFonts.lato(color: Colors.black,fontSize:14 , fontWeight: FontWeight.bold ),),
-                        ],
-                      ),
+                      Ritch_Text(title: 'Activite', detail: widget.client!.activite!, icon: Icons.person),
                       SizedBox(height: 5),
-                      Text(widget.client!.address!,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines:2,
-                        style: GoogleFonts.lato(color: Colors.black,fontSize: 14 , fontWeight: FontWeight.normal ),),
-                      SizedBox(height: 3),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.person,size: 20,color: Colors.teal,),
-                          SizedBox(width: 10,),
-                          Text('Nom De Willaya',style: GoogleFonts.lato(color: Colors.black,fontSize:14 , fontWeight: FontWeight.bold ),),
-                        ],
-                      ),
+                      Ritch_Text(title: 'Nif', detail: widget.client!.nif!, icon: Icons.phone),
                       SizedBox(height: 5),
-                      Text(widget.client!.willaya!,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines:2,
-                        style: GoogleFonts.lato(color: Colors.black,fontSize: 14 , fontWeight: FontWeight.normal ),),
-                      SizedBox(height: 3),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.person,size: 20,color: Colors.teal,),
-                          SizedBox(width: 10,),
-                          Text('Activite',style: GoogleFonts.lato(color: Colors.black,fontSize:14 , fontWeight: FontWeight.bold ),),
-                        ],
-                      ),
+                      Ritch_Text(title: 'Nic', detail: widget.client!.nic!, icon: Icons.person),
                       SizedBox(height: 5),
-                      Text(widget.client!.activite!,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines:2,
-                        style: GoogleFonts.lato(color: Colors.black,fontSize: 14 , fontWeight: FontWeight.normal ),),
+                      Ritch_Text(title: 'Art', detail: widget.client!.art!, icon: Icons.person),
                       SizedBox(height: 5),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.person,size: 20,color: Colors.teal,),
-                            SizedBox(width: 10,),
-                            Text('Num Nif',style: GoogleFonts.lato(color: Colors.black,fontSize:14 , fontWeight: FontWeight.bold ),),
-                          ],
-                        ),
-                      SizedBox(height: 5),
-                      Text(widget.client!.nif!,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines:2,
-                        style: GoogleFonts.lato(color: Colors.black,fontSize: 14 , fontWeight: FontWeight.normal ),),
-                      SizedBox(height: 5),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.person,size: 20,color: Colors.teal,),
-                            SizedBox(width: 10,),
-                            Text('Num Nic',style: GoogleFonts.lato(color: Colors.black,fontSize:14 , fontWeight: FontWeight.bold ),),
-                          ],
-                        ),
-                      SizedBox(height: 5),
-                      Text(widget.client!.nic!,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines:2,
-                        style: GoogleFonts.lato(color: Colors.black,fontSize: 14 , fontWeight: FontWeight.normal ),),
-                      SizedBox(height: 5),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.person,size: 20,color: Colors.grey,),
-                            SizedBox(width: 10,),
-                            Text('Num Rc',style: GoogleFonts.lato(color: Colors.black,fontSize:14 , fontWeight: FontWeight.bold ),),
-                          ],
-                        ),
-                      SizedBox(height: 5),
-                      Text(widget.client!.rc!,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines:2,
-                        style: GoogleFonts.lato(color: Colors.black,fontSize: 14 , fontWeight: FontWeight.normal ),),
-                      SizedBox(height: 5),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.person,size: 20,color: Colors.teal,),
+                      Ritch_Text(title: 'Rc', detail: widget.client!.rc!, icon: Icons.person),
 
 
-                            Text('Num Art',style: GoogleFonts.lato(color: Colors.black,fontSize:14 , fontWeight: FontWeight.bold ),),
-                            SizedBox(width: 10,),
 
-                          ],
-                        ),
-                      SizedBox(height: 5),
-                      Text(widget.client!.art!,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines:2,
-                        style: GoogleFonts.lato(color: Colors.black,fontSize: 14 , fontWeight: FontWeight.normal ),),
+
 
 
 
@@ -283,13 +167,13 @@ class _ClientDetailState extends State<ClientDetail> {
                                   SizedBox(height: 3),
                                  SizedBox(height: 3),
                                     SizedBox(height: 3),
-                                  Text(widget.client!.art!,
+                                  Text(Envoices.client!.art!,
                                     softWrap: true,
                                     overflow: TextOverflow.ellipsis,
                                     maxLines:2,
                                     style: GoogleFonts.lato(color: Colors.black,fontSize: 16 , fontWeight: FontWeight.normal ),),
                                   SizedBox(height: 3),
-                                  Text(widget.client!.nif!,
+                                  Text(Envoices.client!.nif!,
                                     softWrap: true,
                                     overflow: TextOverflow.ellipsis,
                                     maxLines:2,

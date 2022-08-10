@@ -25,15 +25,22 @@ class FactureSession{
     static Future<List<FactureBills_Model>>   getfactureids() async {
         var response= await mysqldb.readDatabase('SELECT "id","num_facture"  FROM "envoice" ' );
         List<FactureBills_Model> information = (response as List).map((c) => FactureBills_Model.fromMap(c)).toList();
-        print("msg msg from session");
+
         return information;
     }
 
     static Future<List<Facture_Model>> getAllData() async {
         var response = await mysqldb.readDatabase('SELECT * FROM "envoice" ' );
         List<Facture_Model> list = (response as List).map((c) => Facture_Model.fromMap(c)).toList();
-        print("lmessage1 from session");
+
         return list;
+    }
+
+    static Future<List<Facture_Model>> getAllDataByid(int id) async {
+      var response = await mysqldb.readDatabase('SELECT * FROM "envoice" WHERE "id"=$id' );
+      List<Facture_Model> list = (response as List).map((c) => Facture_Model.fromMap(c)).toList();
+      print("lmessage1 from session");
+      return list;
     }
 
 

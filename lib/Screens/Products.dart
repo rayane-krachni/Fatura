@@ -124,7 +124,7 @@ class _ProductsState extends State<Products> {
                       ),
                     ):Center(
                       //
-                        child: FlatButton(child: Center(child: Text('    Non Client Existee \n Clicker ici pour lajouter ')),onPressed: ()=>
+                        child: FlatButton(child: const Center(child: Text('Y a pas des Produits Existees \n Clicker ici pour les ajouter ')),onPressed: ()=>
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => AddProduit(),)
@@ -143,18 +143,3 @@ class _ProductsState extends State<Products> {
     );
   }
 }
-/*
-* Expanded(
-                          child :  !produitmanager.produits ? Text('getting des produits')
-                              : produits?.isNotEmpty ?? true ?
-                          GridView.builder(
-                            shrinkWrap: true,
-                            itemCount: produits!.length,
-                            itemBuilder:(BuildContext context,int i){
-                              return ProduitsItem(produit: produits![i],);
-                            },
-                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                            ),
-                          ):Text('Ajouter des produits ')
-                      ),*/

@@ -112,6 +112,7 @@ class _AddFournisseursState extends State<AddFournisseurs> {
                                 decoration: const InputDecoration(
                                   hintText: "Nom",
                                   suffixIcon:  Icon(Icons.person,size: 18,),
+                                  errorBorder: InputBorder.none,
                                 ),
                               ),
                             )),
@@ -329,7 +330,7 @@ class _AddFournisseursState extends State<AddFournisseurs> {
                         padding: const EdgeInsets.only(top: 7.0),
                         child: Container(
 
-                            height: _height*0.06,
+                            height: _height*0.08,
                             width: double.infinity,
                             decoration:  BoxDecoration(
                                 color: Colors.white,
@@ -341,8 +342,9 @@ class _AddFournisseursState extends State<AddFournisseurs> {
                                 )]
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.only(top:1.0,left: 15,right: 5,bottom:12),
+                              padding: const EdgeInsets.only(top:1.0,left: 15,right: 5),
                               child: TextFormField(
+                                maxLines: 3,
                                 controller: activity_control,
                                 decoration: const InputDecoration(
                                   hintMaxLines: 4 ,
@@ -384,7 +386,7 @@ class _AddFournisseursState extends State<AddFournisseurs> {
                                 art.isEmpty||
                                 rc.isEmpty||
                                 phone==''){
-                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Empty fields ')));
+                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Remplir Les Champs Svp ')));
                      }
                       return Insert_Fournisseur();
                     },

@@ -43,10 +43,9 @@ class _Success_DialogState extends State<Success_Dialog> {
                        children: [
                          Text(widget.mytext!),
                          FlatButton(onPressed: (){
-                           Navigator.push(
-                               context,
-                               MaterialPageRoute(builder: (context) => widget.mywidgets!()));
-                         }, child: Text('click to dismiss'))
+                           Navigator.pop(context);
+                           Navigator.pop(context);
+                           }, child: Text('click to dismiss'))
                        ],
                      ),
                    ),

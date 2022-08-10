@@ -28,7 +28,7 @@ class ThemeStyle{
   static const greenShadeL1 = Color(0xFF7DBD07);
   static const greenShadeL2 = Color(0xFFB7DB25);
   static const Color muted = Color(0xFFCED4DA);
-  static  TextStyle initialtitle= GoogleFonts.adamina(color: Colors.black,fontWeight:FontWeight.bold,fontSize: 20 );
+  static  TextStyle initialtitle= GoogleFonts.adamina(color: Colors.black,fontWeight:FontWeight.bold,fontSize: 18 );
   static  TextStyle secondtitle= GoogleFonts.alef(color: Colors.black54,fontWeight:FontWeight.bold,fontSize: 14 );
   static  TextStyle addtitles= GoogleFonts.alef(color: Colors.black,fontWeight:FontWeight.bold,fontSize: 18 );
   static  TextStyle buttontext= GoogleFonts.alef(color: Colors.white,fontWeight:FontWeight.bold,fontSize: 19 );

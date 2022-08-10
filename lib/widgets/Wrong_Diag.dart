@@ -45,7 +45,7 @@ class _Wrong_DialogState extends State<Wrong_Dialog> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => HomePage()));
-                      }, child: Text('click to dismiss'))
+                      }, child: Text('click pour quiter'))
                     ],
                   ),
                 ),

@@ -19,7 +19,8 @@ class Consulte_Bon extends StatefulWidget {
 class _Consulte_BonState extends State<Consulte_Bon> {
   Bills_Manage manager= Bills_Manage();
   List<BonLivraison_Model>? bills;
-
+  List<BonLivraison_Model>? filtrebill;
+  TextEditingController? searchkey = TextEditingController();
   void getBills() async {
     List<BonLivraison_Model> res= await BonLivraisonSession.getbills();
     bills=res;
@@ -52,9 +53,9 @@ class _Consulte_BonState extends State<Consulte_Bon> {
                   const SizedBox(height: 10,),
                   Align(
                       alignment: Alignment.topLeft,
-                      child: Text("Session des Produits  !",style: ThemeStyle.initialtitle,)),
+                      child: Text("Session des Bons de Livraison   !",style: ThemeStyle.initialtitle,)),
                   const SizedBox(height: 5,),
-                  Text("Dans cette vous pouvez consulter , modifier et suprimer votre produits.",style:ThemeStyle.secondtitle,),
+                  Text("Dans cette vous pouvez consulter , modifier et suprimer votre Bons de Livraison .",style:ThemeStyle.secondtitle,),
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0,bottom: 10),
                     child: Container(
@@ -71,6 +72,19 @@ class _Consulte_BonState extends State<Consulte_Bon> {
                           )]
                       ),
                       child: TextFormField(
+                        controller: searchkey,
+                        onChanged: (value){
+                        value=value.toLowerCase();
+                          setState(() {
+                            filtrebill=bills!.where((c) {
+
+                          var searchclient=c.chauffeur!.toLowerCase();
+                          return searchclient.contains(value);
+
+                          } ).toList();
+                          });
+                        },
+
                         decoration:  InputDecoration(
                           border: InputBorder.none,
                           focusedBorder: InputBorder.none,
@@ -98,16 +112,16 @@ class _Consulte_BonState extends State<Consulte_Bon> {
                       )  :
                             bills?.isEmpty ?? true ? Center(
                         //
-                             child: FlatButton(child: Center(child: Text('    Non Client Existee \n Clicker ici pour lajouter ')),onPressed: ()=>
+                             child: FlatButton(child:const Center(child: Text('Y a pas des  Bon de livraison Existees \n     Clicker ici pour les ajoutees ')),onPressed: ()=>
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(builder: (context) => AddLivraison(),)
                               ))):
                       GridView.builder(
                       shrinkWrap: true,
-                      itemCount: bills!.length,
+                      itemCount: searchkey!.text.isNotEmpty ? filtrebill!.length: bills?.length,
                       itemBuilder:(BuildContext context,int i){
-                        return BillsItem(bills: bills![i],);
+                        return BillsItem(bills:  searchkey!.text.isNotEmpty ? filtrebill![i]: bills![i],);
                       },
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,

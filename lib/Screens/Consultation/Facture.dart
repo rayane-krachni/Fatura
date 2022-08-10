@@ -22,7 +22,10 @@ class Consulte_Facture extends StatefulWidget {
 
 class _Consulte_FactureState extends State<Consulte_Facture> {
   Facture_Manage manager= Facture_Manage();
+  TextEditingController? searchkey = TextEditingController();
+
   List<Facture_Model>? factures;
+  List<Facture_Model>? filtrefactures;
 
   void getFactures() async {
     List<Facture_Model> res= await FactureSession.getAllData();
@@ -65,7 +68,7 @@ class _Consulte_FactureState extends State<Consulte_Facture> {
                       alignment: Alignment.topLeft,
                       child: Text("Session des Factures  !",style: ThemeStyle.initialtitle,)),
                   const SizedBox(height: 5,),
-                  Text("Dans cette vous pouvez consulter , modifier et suprimer votre Facture.",style:ThemeStyle.secondtitle,),
+                  Text("Dans cette vous pouvez consulter , modifier et suprimer votre Factures.",style:ThemeStyle.secondtitle,),
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0,bottom: 10),
                     child: Container(
@@ -82,6 +85,18 @@ class _Consulte_FactureState extends State<Consulte_Facture> {
                           )]
                       ),
                       child: TextFormField(
+                        controller: searchkey,
+                        onChanged: (value){
+                          value=value.toLowerCase();
+                          setState(() {
+                            filtrefactures=factures!.where((c) {
+
+                              var searchclient=c.date!.toLowerCase();
+                              return searchclient.contains(value);
+
+                            } ).toList();
+                          });
+                        },
                         decoration:  InputDecoration(
                           border: InputBorder.none,
                           focusedBorder: InputBorder.none,

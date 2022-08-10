@@ -1,7 +1,12 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:freelance/Envoices/PdfApi.dart';
+import 'package:freelance/Envoices/envoices/PdfEnvoiceApi.dart';
+import 'package:freelance/Envoices/envoices/PdfEnvoiceWithlogo.dart';
+import 'package:freelance/Theme/Theme.dart';
+import 'package:freelance/widgets/ritch_text.dart';
 import 'package:provider/provider.dart';
 import '../Model/Client/Client_Model.dart';
 import '../Model/Fcature/Facture_Model.dart';
@@ -11,8 +16,7 @@ import '../Providers/Facture_Management.dart';
 import '../Querries/Client_session.dart';
 import '../Querries/Fournisseur_Session.dart';
 import '../Querries/Produit_Session.dart';
-import '../widget/PdfApi.dart';
-import '../widget/PdfEnvoiceApi.dart';
+
 
 class Calculating extends StatefulWidget {
   Facture_Model? invoice;
@@ -40,24 +44,24 @@ class _CalculatingState extends State<Calculating> {
   void getlistclient() async
   {
     List<Client_Model> myclientlist= await ClientSession.getClientbyid(widget.invoice!.id_client!);
-    print('mmm $myclientlist');
+
     invoiceclient=myclientlist;
     manager.loadclientpdf=true;
-    print('ggg ${invoiceclient}');
+
   }
   List<String> getproduitlist(String list)
   {
     List<String> ids =new List<String>.empty(growable: true);
-    print('111111 $list');
+
     for(int i =0 ; i < list.length ; i++ )
     {
-      print('22222 $list');
+
       if(list[i]!=';')
       {
         ids.add(list[i]);
       }
     }
-    print("ids$ids");
+
 
     return ids;
 
@@ -66,9 +70,8 @@ class _CalculatingState extends State<Calculating> {
   void getProduit(List<String> produitsids) async{
     for(int i =0 ; i < produitsids.length ; i++ )
     {
-      print('idf ${produitsids[i]}');
+
       List<Produit_Model> myproduitslist= await ProduitSession.GetAllProductsbyid(int.parse(produitsids[i]));
-      print('hhhhh ${myproduitslist}');
       invoiceproduit.add(myproduitslist[0]);
       //List<Client_Model> mmap = await (response as List).map((c) => Client_Model.fromMap(c)).toList();
 
@@ -78,30 +81,17 @@ class _CalculatingState extends State<Calculating> {
   void getproduitquantitelist(String quantite)
   {
     String qte='';
-    //List<String> quant =new List<String>.empty(growable: true);
-    print('rtrt $quantite');
+
     for(int i =0 ; i < quantite.length ; i++ )
     {
-      print('c1c1 ${quantite[i]}');
       if(quantite[i]!=';') {
-        print('c2c1 ${quantite[i]}');
         qte = qte + quantite[i];
-        print('c3c1 ${quantite[i]}');
       }
       else{
-        print('c4c1 ${quantite[i]}');
         invoiceqt.add(qte);
-        print('c5c1 ${invoiceqt}');
-        print("C2C2$invoiceqt");
         qte="";
-
       }
-
-
     }
-
-
-
 
   }
   @override
@@ -142,54 +132,103 @@ class _CalculatingState extends State<Calculating> {
                         offset: Offset(0,3)
                     )]
                 ),
-                 child:(invoiceclient.isEmpty || invoicefournisseur.isEmpty || invoiceproduit.isEmpty || invoiceqt.isEmpty ) ? Text('emptyy')
+                 child:(invoiceclient.isEmpty || invoicefournisseur.isEmpty || invoiceproduit.isEmpty || invoiceqt.isEmpty ) ?
+
+                 Center(
+                     child: Column(
+                       mainAxisAlignment:  MainAxisAlignment.center,
+                       children:  const [
+                         Center(
+                           child: SpinKitPouringHourGlassRefined  (
+                             color: Colors.teal,
+                             size: 50.0,
+                             duration: Duration(milliseconds: 12000),
+
+                           ),
+                         ),
+                         
+                         Center(child: Text('Ya Des information sont null Ils')),
+                         Center(child: Text('Peuvent être supprimés ')),
+                       ],
+                     ))
                  :SizedBox(
-                   width: MediaQuery.of(context).size.width,
+                   width: double.maxFinite,
                    child: SingleChildScrollView(
                      child: Column(
+                       mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(widget.invoice!.num_facture!.toString()),
-                        Text('Client'),
-                        Text("Full Name: ${invoiceclient[0].fullname!}"),
-                        Text("Tel Phone : ${invoiceclient[0].telephone!}"),
-                        Text("Address: ${invoiceclient[0].address!}"),
-                        Text('Fournisseur'),
-                        Text("Full Name: ${invoicefournisseur[0].fullname!}"),
-                        Text("Tel Phone : ${invoicefournisseur[0].telephone!}"),
-                        Text("Address: ${invoicefournisseur[0].address!}"),
 
-                        Text('Produit'),
+
+                        Ritch_Text(title: 'Les information de client ',detail:'' ,icon: Icons.person),
+
+                        Ritch_Text(title: 'Nom ',detail:invoiceclient[0].fullname! ,icon: Icons.person),
+
+                        Ritch_Text(title: 'Phone ',detail:invoiceclient[0].telephone!.toString() ,icon: Icons.person),
+                        Ritch_Text(title: 'Address ',detail:invoiceclient[0].address! ,icon: Icons.person),
+
+
+                        Ritch_Text(title: 'Les information de Fournisseur ',detail:'' ,icon: Icons.person),
+
+                        Ritch_Text(title: 'Nom ',detail:invoicefournisseur[0].fullname! ,icon: Icons.person),
+
+                        Ritch_Text(title: 'Phone ',detail:invoicefournisseur[0].telephone!.toString() ,icon: Icons.person),
+                        Ritch_Text(title: 'Address ',detail:invoicefournisseur[0].address! ,icon: Icons.person),
+                        Ritch_Text(title: 'Les information des Produit ',detail:'' ,icon: Icons.person),
+
                         SizedBox(
                           child: ListView.builder(
                           shrinkWrap: true,
                           itemCount: invoiceproduit.length,
                           itemBuilder: (BuildContext context, int index) {
                             return Row(children:[
-                              Text("Address: ${invoiceqt[index]}"),
-                              SizedBox(width: 30,),
-                              Text(invoiceproduit[index].tva.toString()),
-                              SizedBox(width: 30,),
-                              Text(invoiceproduit[index].name!)]);
+                              Text(invoiceproduit[index].name!),
+                              SizedBox(width: 10,),
+                              Text("Qte: ${invoiceqt[index]}"),
+                              SizedBox(width: 10,),
+                              Text("tva: ${invoiceproduit[index].tva.toString()} %"),
+
+                              ]);
                           },
 
 
                         ),) ,
-                      // Text(invoiceproduitlist.length.toString()),
-                        Text(invoiceproduit.length.toString()),
-                      //  Text(invoiceqt!.first),
-                       // Text(invoicefournisseur[0].fullname!),
 
-                        SizedBox(
-                          child: RaisedButton(
-                            onPressed: () async{
 
-                              final pdfFile= await  PdfEnvoiceApi.generate(widget.invoice!,invoiceclient[0],invoicefournisseur[0],invoiceproduit,invoiceqt );
-                              await PdfApi.openFile(pdfFile);
-                              // Navigator.push(context, MaterialPageRoute(builder: (context) => FactureDetailExported(facture: widget.facture! )))
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
 
-                            },
-                            child: Text("Export Pdf") ,
-                          ),
+                            SizedBox(
+                              width: 150,
+                              child: RaisedButton(
+                                onPressed: () async{
+
+                                  final pdfFile= await  PdfEnvoiceApi.generate(widget.invoice!,invoiceclient[0],invoicefournisseur[0],invoiceproduit,invoiceqt );
+                                  await PdfApi.openFile(pdfFile);
+                                  // Navigator.push(context, MaterialPageRoute(builder: (context) => FactureDetailExported(facture: widget.facture! )))
+
+                                },
+                                color: Colors.teal,
+                                child: const Text("Exporter Avec Un Logo",style: TextStyle(color: Colors.white,fontSize: 12),) ,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 150,
+                              child: RaisedButton(
+
+                                onPressed: () async{
+
+                                  final pdfFile= await  PdfEnvoiceWithoutLogoApi.generate(widget.invoice!,invoiceclient[0],invoicefournisseur[0],invoiceproduit,invoiceqt );
+                                  await PdfApi.openFile(pdfFile);
+                                  // Navigator.push(context, MaterialPageRoute(builder: (context) => FactureDetailExported(facture: widget.facture! )))
+
+                                },
+                                color: Colors.teal,
+                                child: Text("Exporter Sans Un Logo",style: TextStyle(color: Colors.white,fontSize: 12)) ,
+                              ),
+                            ),
+                          ],
                         )
                       //  Text(invoiceunit!.first),
 

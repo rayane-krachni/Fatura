@@ -6,8 +6,7 @@ import 'package:freelance/Querries/Client_session.dart';
 import 'package:freelance/Querries/Facture_Session.dart';
 import 'package:freelance/Screens/Details/Facture_Detail/Detail_Facture.dart';
 import 'package:freelance/Screens/HomePage.dart';
-import 'package:freelance/widget/PdfApi.dart';
-import 'package:freelance/widget/PdfEnvoiceApi.dart';
+import 'package:freelance/Theme/Theme.dart';
 import 'package:freelance/widgets/Success_Diag.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -37,11 +36,14 @@ class _FactureItemState extends State<FactureItem> {
     int insrtcleint=   await FactureSession.DeleteInvoice(widget.facture!.id!);
     if( insrtcleint!= 0)
     {
-      showDialog(context: context, builder:(_)=>Success_Dialog(mytext: "Client done",mywidgets :()=> HomePage()));
+      showDialog(context: context, builder:(_)=>Success_Dialog(mytext: "La creation est fini, consulter vous voulez",mywidgets :()=> HomePage()));
+
     }
+
     else {
       print('results $insrtcleint');
     }
+
 
   }
 
@@ -72,11 +74,11 @@ class _FactureItemState extends State<FactureItem> {
                   MaterialPageRoute(builder: (context) => Calculating(invoice: widget.facture!,),)
               );
 
-              /*Facture_Model mywidget= await widget.facture!;
+              /*Facture_Model mywidget= await Envoices.facture!;
             final pdfFile= await  PdfEnvoiceApi.generate(mywidget);
 
             await PdfApi.openFile(pdfFile);*/
-              // Navigator.push(context, MaterialPageRoute(builder: (context) => FactureDetailExported(facture: widget.facture! )))
+              // Navigator.push(context, MaterialPageRoute(builder: (context) => FactureDetailExported(facture: Envoices.facture! )))
 
             },
             child: Container(
@@ -102,18 +104,76 @@ class _FactureItemState extends State<FactureItem> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              IconButton(onPressed: (){
-                                Delete_Facture();
-                              }, icon: Icon(Icons.more_vert,size: 30,color: Colors.teal,))
+                              IconButton(
+                                  onPressed: (){
+                                    showModalBottomSheet<void>(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return Container(
+                                          height: 230,
+                                          decoration: BoxDecoration(
+                                              color:Colors.white,
+                                              borderRadius: BorderRadius.circular(20)
+                                          ),
+                                          //color: Colors.amber,
+                                          child:  Column(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: <Widget>[
+                                              SizedBox(height: 5,),
+                                              GestureDetector(
+                                                onTap:(){
+                                                  Delete_Facture();
+                                                },
+                                                child: Container(
+                                                  height: 60,
+                                                  width: double.infinity,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.red,
+                                                    borderRadius: BorderRadius.circular(10),
+
+
+                                                  ),
+                                                  child: Center(child: Text('Supprimer cette facture',style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold),)),
+                                                ),
+                                              ),
+
+                                              SizedBox(height: 5,),
+                                              GestureDetector(
+                                                onTap:(){},
+                                                child: Container(
+                                                  height: 60,
+                                                  width: double.infinity,
+                                                  decoration: BoxDecoration(
+                                                    color:ThemeStyle.muted,
+                                                    borderRadius: BorderRadius.circular(10),
+
+                                                  ),
+                                                  child: Center(child: Text('Fermer le Diag',style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.bold),)),
+                                                ),
+                                              ),
+
+                                            ],
+
+                                          ),
+                                        );
+                                      },
+                                    );
+                                    //Delete_Client();
+                                  },
+
+
+                              icon: Icon(Icons.more_vert,size: 20,color: Colors.teal,))
                             ],
                           ),
                           const CircleAvatar(
                             backgroundColor: Colors.white,
                             backgroundImage: AssetImage("assets/images/facture.png",),
-                            radius: 30,
+                            radius: 26,
                           ),
-                          SizedBox(height: 10,),
-                          Text(widget.facture!.num_facture.toString(),style: GoogleFonts.lato(color:Colors.black,fontSize: 15,fontWeight: FontWeight.bold)),
+                          SizedBox(height: 5,),
+                          Text('Facture N '+widget.facture!.num_facture.toString(),style: GoogleFonts.lato(color:Colors.black,fontSize: 13,fontWeight: FontWeight.bold)),
+                          Text(widget.facture!.date!.toString(),style: GoogleFonts.lato(color:Colors.black,fontSize: 12,fontWeight: FontWeight.bold)),
 
                         ],
                       ),
