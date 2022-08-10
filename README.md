@@ -4,13 +4,27 @@ A new Flutter project.
 
 ## Application Description
 
-This project is a starting point for a Flutter application.
+This project is a starting point for a Flutter application 
+The main aim of this project is to Facilate the calculation and generate envoices.
 
-A few resources to get you started if this is your first Flutter project:
+### Tools used
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+1-sqflite as Local DataBase.
+2-Provider For the state management.
+3-Pdf package to export the envoices.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Main Features
+
+1-Authentification
+2-Create /Edit /Delete many objects.
+3-Calculation affected
+4-Generate Envoices
+
+
+### Main Screens
+
+![smartmockups_l5ron3lp](https://user-images.githubusercontent.com/87647184/179603112-6486a329-6f7d-4b67-9e02-03cde46e901f.jpg)
+
+![Slide 16_9 - 2(1)](https://user-images.githubusercontent.com/87647184/182099991-de00f4e6-190d-4b00-b2db-d7cbae7dbec2.png)
+
+
