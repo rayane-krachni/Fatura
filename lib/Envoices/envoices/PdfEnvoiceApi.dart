@@ -14,7 +14,7 @@ class PdfEnvoiceApi{
   static double?totalttc;
   static double?total;
 
-  static Future<File> generate (Facture_Model invoice, Client_Model  invoiceclient, Fournisseur_Model invoicefournisseur, List<Produit_Model> invoiceproduit,List<String> qte) async {
+  static Future<File> generate (Facture_Model invoice, Client_Model  invoiceclient, Fournisseur_Model invoicefournisseur, List<Produit_Model> invoiceproduit,List<String> qte,List<String> ute) async {
     totalttc=0;
     totaltva=0;
     final imageJpg =
@@ -25,6 +25,7 @@ class PdfEnvoiceApi{
     pdf.addPage(MultiPage(
       build: (context) => [
         Column(
+            mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -41,17 +42,13 @@ class PdfEnvoiceApi{
 
                 ]
             ),
-           // Center(child: Text(invoicefournisseur.activite!,style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.bold),),),
-            Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
+            Container(
 
+              child: Center(child: Text(invoicefournisseur.activite!,textAlign: TextAlign.center,style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),),),
 
-                  Center(child: Text(invoicefournisseur.activite!,style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.bold),),),
-
-                ]
             ),
+           // Center(child: Text(invoicefournisseur.activite!,style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.bold),),),
+
             Center(child: Text(invoicefournisseur.address!,style: TextStyle(fontSize: 13.5),),),
 
 
@@ -60,7 +57,7 @@ class PdfEnvoiceApi{
 
 
        ,
-        buildHeader(invoice, invoiceclient,  invoicefournisseur, invoiceproduit,qte),
+        buildHeader(invoice, invoiceclient,  invoicefournisseur, invoiceproduit,qte,ute),
       ],
      // footer: (context) => buildFooter(invoice),
     ));
@@ -71,7 +68,7 @@ class PdfEnvoiceApi{
 
 
   static Widget buildHeader(Facture_Model invoice, Client_Model  invoiceclient, Fournisseur_Model invoicefournisseur,
-      List<Produit_Model> invoiceproduit,List<String>qte) {
+      List<Produit_Model> invoiceproduit,List<String>qte,List<String> ute) {
     total=totalttc!+totaltva!;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,7 +96,7 @@ class PdfEnvoiceApi{
                   ]),
             ),
 
-            SizedBox(height: 0.5 * PdfPageFormat.cm),
+            SizedBox(height: 1 * PdfPageFormat.cm),
             Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -121,8 +118,8 @@ class PdfEnvoiceApi{
               ),
             ),
 
-            SizedBox(height: 0.5 * PdfPageFormat.cm),
-            buildInvoice(invoiceproduit,qte),
+            SizedBox(height: 1 * PdfPageFormat.cm),
+            buildInvoice(invoiceproduit,qte,ute),
             SizedBox(height: 2 * PdfPageFormat.cm),
             //buildTvaInvoice(invoiceproduit,qte),
             Row(
@@ -218,7 +215,7 @@ class PdfEnvoiceApi{
      // Text("Client",style:TextStyle(fontWeight: FontWeight.bold,)),
       RichText(text: TextSpan(
           children: <TextSpan>[
-            TextSpan(text:"Nom : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
+            TextSpan(text:"Nom de Client : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
             TextSpan(text:"${client.fullname}" )
 
           ]
@@ -227,22 +224,22 @@ class PdfEnvoiceApi{
       RichText(text: TextSpan(
           children: <TextSpan>[
             TextSpan(text:"Address : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
-            TextSpan(text:"${client.address} Willaya ${client.willaya}" )
+            TextSpan(text:"${client.address}  ${client.willaya}" )
 
           ]
       )),
       SizedBox(height: 1 * PdfPageFormat.mm),
       RichText(text: TextSpan(
           children: <TextSpan>[
-            TextSpan(text:"Tel/Fax : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
-            TextSpan(text:"${client.telephone}" )
+            TextSpan(text:"Tel/Fax : ",style:TextStyle(fontWeight: FontWeight.bold) ),
+            TextSpan(text:"${client.telephone}", )
 
           ]
       )),
       SizedBox(height: 1 * PdfPageFormat.mm),
       RichText(text: TextSpan(
           children: <TextSpan>[
-            TextSpan(text:"Activite : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
+            TextSpan(text:"activité : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
             TextSpan(text:"${client.activite}" )
 
           ]
@@ -250,7 +247,7 @@ class PdfEnvoiceApi{
       SizedBox(height: 1 * PdfPageFormat.mm),
       RichText(text: TextSpan(
           children: <TextSpan>[
-            TextSpan(text:"Num Nif  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
+            TextSpan(text:"N° Nif  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
             TextSpan(text:"${client.nif}" )
 
           ]
@@ -258,7 +255,7 @@ class PdfEnvoiceApi{
       SizedBox(height: 1 * PdfPageFormat.mm),
       RichText(text: TextSpan(
           children: <TextSpan>[
-            TextSpan(text:"Num Nic  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
+            TextSpan(text:"N° Nic  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
             TextSpan(text:"${client.nic}" )
 
           ]
@@ -266,7 +263,7 @@ class PdfEnvoiceApi{
       SizedBox(height: 1 * PdfPageFormat.mm),
       RichText(text: TextSpan(
           children: <TextSpan>[
-            TextSpan(text:"Num Art  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
+            TextSpan(text:"N° Art  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
             TextSpan(text:"${client.art}" )
 
           ]
@@ -274,7 +271,7 @@ class PdfEnvoiceApi{
       SizedBox(height: 1 * PdfPageFormat.mm),
       RichText(text: TextSpan(
           children: <TextSpan>[
-            TextSpan(text:"Num rc  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
+            TextSpan(text:"N° Rc  :  ",style:TextStyle(fontWeight: FontWeight.bold,) ),
             TextSpan(text:"${client.rc}" )
 
           ]
@@ -297,7 +294,7 @@ class PdfEnvoiceApi{
           children: [
            // Text("Fournisseur",style:TextStyle(fontWeight: FontWeight.bold,)),
             Text('Entreprise Information',style: TextStyle(fontWeight: FontWeight.bold,)),
-            SizedBox(height: 5 * PdfPageFormat.mm),
+            SizedBox(height: 2 * PdfPageFormat.mm),
             RichText(text: TextSpan(
                 children: <TextSpan>[
                   TextSpan(text:"Tel/Fax  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
@@ -308,7 +305,7 @@ class PdfEnvoiceApi{
             SizedBox(height: 1 * PdfPageFormat.mm),
             RichText(text: TextSpan(
                 children: <TextSpan>[
-                  TextSpan(text:"No Nic  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
+                  TextSpan(text:"N° Nic  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
                   TextSpan(text:"${fournisseur.nif}" )
 
                 ]
@@ -316,7 +313,7 @@ class PdfEnvoiceApi{
             SizedBox(height: 1 * PdfPageFormat.mm),
             RichText(text: TextSpan(
                 children: <TextSpan>[
-                  TextSpan(text:"No Nic  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
+                  TextSpan(text:"N° Nic  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
                   TextSpan(text:"${fournisseur.nic}" )
 
                 ]
@@ -324,7 +321,7 @@ class PdfEnvoiceApi{
             SizedBox(height: 1 * PdfPageFormat.mm),
             RichText(text: TextSpan(
                 children: <TextSpan>[
-                  TextSpan(text:"Num Art  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
+                  TextSpan(text:"N° Art  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
                   TextSpan(text:"${fournisseur.art}" )
 
                 ]
@@ -332,7 +329,7 @@ class PdfEnvoiceApi{
             SizedBox(height: 1 * PdfPageFormat.mm),
             RichText(text: TextSpan(
                 children: <TextSpan>[
-                  TextSpan(text:"Num rc  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
+                  TextSpan(text:"N° rc  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
                   TextSpan(text:"${fournisseur.rc}" )
 
                 ]
@@ -343,22 +340,22 @@ class PdfEnvoiceApi{
       )
      ;
 
- static Widget buildInvoice(List<Produit_Model> produit,List<String> quantite) {
+ static Widget buildInvoice(List<Produit_Model> produit,List<String> quantite,List<String> unite) {
 
     final headers = [
       'Code Article',
       'Designation',
-      'Quantite',
-      'Tva',
-      'Prix Unit',
-      'Total Hors Tax'
+      'Qte/unité',
+      'Tva \%',
+      'Prix',
+      'Total HT'
     ];
    final  data = produit.asMap().map((i,e){
       totalttc=totalttc!+(e.prix!*int.parse(quantite[i]));
       return MapEntry(i,[
        e.code,
        e.name,
-       quantite[i],
+        ' ${quantite[i] +' / '+ unite[i] }',
        e.tva,
        e.prix,
       ' ${e.prix!*int.parse(quantite[i])} Da',

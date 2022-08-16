@@ -8,14 +8,14 @@ import 'package:freelance/Envoices/envoices/PdfEnvoiceWithlogo.dart';
 import 'package:freelance/Theme/Theme.dart';
 import 'package:freelance/widgets/ritch_text.dart';
 import 'package:provider/provider.dart';
-import '../Model/Client/Client_Model.dart';
-import '../Model/Fcature/Facture_Model.dart';
-import '../Model/Fournisseur/Fournisseur_Model.dart';
-import '../Model/Produit/Produit_Model.dart';
-import '../Providers/Facture_Management.dart';
-import '../Querries/Client_session.dart';
-import '../Querries/Fournisseur_Session.dart';
-import '../Querries/Produit_Session.dart';
+import '../../Model/Client/Client_Model.dart';
+import '../../Model/Fcature/Facture_Model.dart';
+import '../../Model/Fournisseur/Fournisseur_Model.dart';
+import '../../Model/Produit/Produit_Model.dart';
+import '../../Providers/Facture_Management.dart';
+import '../../Querries/Client_session.dart';
+import '../../Querries/Fournisseur_Session.dart';
+import '../../Querries/Produit_Session.dart';
 
 
 class Calculating extends StatefulWidget {
@@ -34,12 +34,12 @@ class _CalculatingState extends State<Calculating> {
   List<Produit_Model> invoiceproduit=List<Produit_Model>.empty(growable: true);
   List<String> invoiceproduitlist=List<String>.empty(growable: true);
   List<String> invoiceqt=List<String>.empty(growable: true);
-  List<String>? invoiceunit;
+  List<String> invoiceunit=List<String>.empty(growable: true);
   void getFournisseur() async{
     List<Fournisseur_Model> map = await FournisseurSession.getfournisseurbyid(widget.invoice!.id_fournisseur!);
     invoicefournisseur=map;
     manager.loadfournisspdf=true;
-    print('fff$invoicefournisseur');
+
   }
   void getlistclient() async
   {
@@ -94,18 +94,38 @@ class _CalculatingState extends State<Calculating> {
     }
 
   }
+
+  void getproduitunitelist(String unite)
+  {
+      String qte='';
+      print(unite.length);
+      for(int i =0 ; i < unite.length ; i++ )
+      {
+        print( '$i ' +unite[i]);
+        if(unite[i]==';')
+          {print('$i true ' +unite[i]);}
+        else
+          {print('$i false' +unite[i]);
+           invoiceunit.add(unite[i]);
+          print('$i envoice' +invoiceunit.toString());
+          }
+      }
+
+
+  }
   @override
   void initState()  {
     getFournisseur();
-    print('111 ${!manager.loadfournisspdf}');
+
     getlistclient();
-    print('222 ${!manager.loadclientpdf}');
+
     invoiceproduitlist=getproduitlist(widget.invoice!.id_produit!);
-    print('___ $invoiceproduitlist');
+
     getProduit(invoiceproduitlist);
-    //getproduitlist();
-    print('333 ${!manager.loadcproduitpdf}');
+
     getproduitquantitelist(widget.invoice!.quantite!);
+
+    getproduitunitelist(widget.invoice!.unite!);
     super.initState();
   }
   @override
@@ -123,14 +143,11 @@ class _CalculatingState extends State<Calculating> {
               padding: const EdgeInsets.all(20.0),
               child:(manag.loadclientpdf || manag.loadfournisspdf || manag.loadcproduitpdf) ?
                 Container(
-                decoration: BoxDecoration(
+                  height: MediaQuery.of(context).size.height,
+                decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(15)),
-                    boxShadow: [BoxShadow(
-                        blurRadius:5 ,
-                        color: Colors.grey.withOpacity(0.2),
-                        offset: Offset(0,3)
-                    )]
+
                 ),
                  child:(invoiceclient.isEmpty || invoicefournisseur.isEmpty || invoiceproduit.isEmpty || invoiceqt.isEmpty ) ?
 
@@ -147,8 +164,8 @@ class _CalculatingState extends State<Calculating> {
                            ),
                          ),
                          
-                         Center(child: Text('Ya Des information sont null Ils')),
-                         Center(child: Text('Peuvent être supprimés ')),
+                         Center(child: Text('Ya Des information manquent')),
+
                        ],
                      ))
                  :SizedBox(
@@ -160,33 +177,40 @@ class _CalculatingState extends State<Calculating> {
                       children: [
 
 
-                        Ritch_Text(title: 'Les information de client ',detail:'' ,icon: Icons.person),
-
+                        Ritch_Text(title: 'Les details de client ',detail:'' ,icon: Icons.person,iconcolor: Colors.transparent,fontsize: 16,),
+                        SizedBox(height: 10,),
                         Ritch_Text(title: 'Nom ',detail:invoiceclient[0].fullname! ,icon: Icons.person),
-
-                        Ritch_Text(title: 'Phone ',detail:invoiceclient[0].telephone!.toString() ,icon: Icons.person),
-                        Ritch_Text(title: 'Address ',detail:invoiceclient[0].address! ,icon: Icons.person),
-
-
-                        Ritch_Text(title: 'Les information de Fournisseur ',detail:'' ,icon: Icons.person),
-
+                        SizedBox(height: 5,),
+                        Ritch_Text(title: 'Phone ',detail:invoiceclient[0].telephone!.toString() ,icon: Icons.phone),
+                        const SizedBox(height: 5,),
+                        Ritch_Text(title: 'Address ',detail:invoiceclient[0].address! ,icon: Icons.location_on),
+                        const SizedBox(height: 10,),
+                        Ritch_Text(title: 'Les details de Fournisseur ',detail:'' ,icon: Icons.person,iconcolor: Colors.transparent,fontsize: 16),
+                        const SizedBox(height: 10,),
                         Ritch_Text(title: 'Nom ',detail:invoicefournisseur[0].fullname! ,icon: Icons.person),
-
-                        Ritch_Text(title: 'Phone ',detail:invoicefournisseur[0].telephone!.toString() ,icon: Icons.person),
-                        Ritch_Text(title: 'Address ',detail:invoicefournisseur[0].address! ,icon: Icons.person),
-                        Ritch_Text(title: 'Les information des Produit ',detail:'' ,icon: Icons.person),
-
+                        const SizedBox(height: 5,),
+                        Ritch_Text(title: 'Phone ',detail:invoicefournisseur[0].telephone!.toString() ,icon: Icons.phone),
+                        const SizedBox(height: 5,),
+                        Ritch_Text(title: 'Address ',detail:invoicefournisseur[0].address! ,icon: Icons.location_on),
+                        const SizedBox(height: 10,),
+                        Ritch_Text(title: 'Les details des Produits ',detail:'' ,icon: Icons.person,iconcolor: Colors.transparent,fontsize: 16),
+                        const SizedBox(height: 10,),
                         SizedBox(
                           child: ListView.builder(
                           shrinkWrap: true,
                           itemCount: invoiceproduit.length,
                           itemBuilder: (BuildContext context, int index) {
                             return Row(children:[
+                              const Icon(Icons.shopping_cart,size: 15,color: Colors.teal, ),
+                              const SizedBox(width: 5,),
+                              Text('Produit $index:  ',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
                               Text(invoiceproduit[index].name!),
                               SizedBox(width: 10,),
                               Text("Qte: ${invoiceqt[index]}"),
-                              SizedBox(width: 10,),
+                              const SizedBox(width: 10,),
                               Text("tva: ${invoiceproduit[index].tva.toString()} %"),
+                              const SizedBox(width: 10,),
+                              Text("ute: ${invoiceunit[index]}"),
 
                               ]);
                           },
@@ -194,17 +218,17 @@ class _CalculatingState extends State<Calculating> {
 
                         ),) ,
 
-
-                        Row(
+                        SizedBox(height: 30,),
+                        Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
 
                             SizedBox(
-                              width: 150,
+                              width: MediaQuery.of(context).size.width,
                               child: RaisedButton(
                                 onPressed: () async{
 
-                                  final pdfFile= await  PdfEnvoiceApi.generate(widget.invoice!,invoiceclient[0],invoicefournisseur[0],invoiceproduit,invoiceqt );
+                                  final pdfFile= await  PdfEnvoiceApi.generate(widget.invoice!,invoiceclient[0],invoicefournisseur[0],invoiceproduit,invoiceqt,invoiceunit );
                                   await PdfApi.openFile(pdfFile);
                                   // Navigator.push(context, MaterialPageRoute(builder: (context) => FactureDetailExported(facture: widget.facture! )))
 
@@ -214,18 +238,18 @@ class _CalculatingState extends State<Calculating> {
                               ),
                             ),
                             SizedBox(
-                              width: 150,
+                              width: MediaQuery.of(context).size.width,
                               child: RaisedButton(
 
                                 onPressed: () async{
 
-                                  final pdfFile= await  PdfEnvoiceWithoutLogoApi.generate(widget.invoice!,invoiceclient[0],invoicefournisseur[0],invoiceproduit,invoiceqt );
+                                  final pdfFile= await  PdfEnvoiceWithoutLogoApi.generate(widget.invoice!,invoiceclient[0],invoicefournisseur[0],invoiceproduit,invoiceqt,invoiceunit );
                                   await PdfApi.openFile(pdfFile);
                                   // Navigator.push(context, MaterialPageRoute(builder: (context) => FactureDetailExported(facture: widget.facture! )))
 
                                 },
                                 color: Colors.teal,
-                                child: Text("Exporter Sans Un Logo",style: TextStyle(color: Colors.white,fontSize: 12)) ,
+                                child: Text("Exporter Sans  Logo",style: TextStyle(color: Colors.white,fontSize: 12)) ,
                               ),
                             ),
                           ],
@@ -236,7 +260,19 @@ class _CalculatingState extends State<Calculating> {
                 ),
                    ),
                  )
-              ):Text('waair'),
+              ): Center(
+                child: Column(
+                  children: const [
+                    SpinKitPouringHourGlassRefined  (
+                      color: Colors.teal,
+                      size: 50.0,
+                      duration: Duration(milliseconds: 12000),
+
+                    ),
+                    Text('Attendez s\'il vous plait')
+                  ],
+                ),
+              ),
             ),
           );
         },

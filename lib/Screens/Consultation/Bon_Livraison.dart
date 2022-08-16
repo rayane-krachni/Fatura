@@ -25,7 +25,7 @@ class _Consulte_BonState extends State<Consulte_Bon> {
     List<BonLivraison_Model> res= await BonLivraisonSession.getbills();
     bills=res;
     //List<Client_Model> mmap = await (response as List).map((c) => Client_Model.fromMap(c)).toList();
-   manager.loadingbills=true;
+    manager.loadingbills=true;
 
   }
   @override
@@ -74,14 +74,14 @@ class _Consulte_BonState extends State<Consulte_Bon> {
                       child: TextFormField(
                         controller: searchkey,
                         onChanged: (value){
-                        value=value.toLowerCase();
+                          value=value.toLowerCase();
                           setState(() {
                             filtrebill=bills!.where((c) {
 
-                          var searchclient=c.chauffeur!.toLowerCase();
-                          return searchclient.contains(value);
+                              var searchclient=c.chauffeur!.toLowerCase();
+                              return searchclient.contains(value);
 
-                          } ).toList();
+                            } ).toList();
                           });
                         },
 
@@ -101,23 +101,23 @@ class _Consulte_BonState extends State<Consulte_Bon> {
                     ),
                   ),
                   Expanded(
-                      child: !billsmanager.loadingbills
-                      ?     const Center(
-                        child: SpinKitPouringHourGlassRefined  (
-                          color: Colors.teal,
-                          size: 50.0,
-                          duration: Duration(milliseconds: 12000),
+                    child: !billsmanager.loadingbills
+                        ?     const Center(
+                      child: SpinKitPouringHourGlassRefined  (
+                        color: Colors.teal,
+                        size: 50.0,
+                        duration: Duration(milliseconds: 12000),
 
-                        ),
-                      )  :
-                            bills?.isEmpty ?? true ? Center(
-                        //
-                             child: FlatButton(child:const Center(child: Text('Y a pas des  Bon de livraison Existees \n     Clicker ici pour les ajoutees ')),onPressed: ()=>
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => AddLivraison(),)
-                              ))):
-                      GridView.builder(
+                      ),
+                    )  :
+                    bills?.isEmpty ?? true ? Center(
+                      //
+                        child: FlatButton(child:const Center(child: Text('Y Clicker ici pour  ajouter un bon de livraison ')),onPressed: ()=>
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => AddLivraison(),)
+                            ))):
+                    GridView.builder(
                       shrinkWrap: true,
                       itemCount: searchkey!.text.isNotEmpty ? filtrebill!.length: bills?.length,
                       itemBuilder:(BuildContext context,int i){

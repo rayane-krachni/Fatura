@@ -6,6 +6,8 @@ import 'package:freelance/Screens/Fournisseur.dart';
 import 'package:freelance/Theme/Theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../widgets/ritch_text.dart';
+
 class FournisseurDetail extends StatefulWidget {
   Fournisseur_Model? fournisseur;
   FournisseurDetail({Key? key,this.fournisseur}) : super(key: key);
@@ -44,7 +46,7 @@ class _FournisseurDetailState extends State<FournisseurDetail> {
               ),
               child:  Align(
                 alignment:Alignment.topCenter,
-                child: Text('Les Details des Clients',style: GoogleFonts.lato(color: Colors.white,fontSize: 19 ),),),
+                child: Text('Les Details de Fournisseur ',style: GoogleFonts.lato(color: Colors.white,fontSize: 19 ),),),
             ),
           ),
           Positioned(
@@ -90,144 +92,38 @@ class _FournisseurDetailState extends State<FournisseurDetail> {
                         indent: 20,
                       ),
                       SizedBox(height: 10,),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.person,size: 20,color: Colors.teal,),
-                          SizedBox(width: 10,),
-                          Text('Nom De Foutnisseur',style: GoogleFonts.lato(color: Colors.black,fontSize:14 , fontWeight: FontWeight.bold ),),
-                        ],
+                      Center(child: Ritch_Text(title: 'Nom de Fournissseur',detail: widget.fournisseur!.fullname!,icon: Icons.production_quantity_limits,)),
+                      SizedBox(height: 5),
+                     Center(child: Ritch_Text(title: 'Num de Telephone',detail: widget.fournisseur!.telephone!.toString(),icon: Icons.phone,)),
+                      SizedBox(height: 5),
+                      Center(child: Ritch_Text(title: 'Address',detail:'',icon: Icons.location_on,)),
+                      SizedBox(height: 5),
+                      Text(widget.fournisseur!.address!,overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.left,
+                        maxLines:3,
+                        style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400),     softWrap: true,
+                      ),
+                      Center(child: Ritch_Text(title: 'Nom De Willaya',detail:widget.fournisseur!.willaya!,icon: Icons.location_on,)),
+                      SizedBox(height: 5),
+                     Center(child: Ritch_Text(title: 'Activite',detail:'',icon: Icons.production_quantity_limits,)),
+                      SizedBox(height: 5),
+                      Text(widget.fournisseur!.activite!,overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.left,
+                        maxLines:3,
+                        style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400),     softWrap: true,
                       ),
                       SizedBox(height: 5),
-                      Text(widget.fournisseur!.fullname!,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines:2,
-                        style: GoogleFonts.lato(color: Colors.black,fontSize: 14 , fontWeight: FontWeight.normal ),),
+                      Center(child: Ritch_Text(title: 'Nif',detail:widget.fournisseur!.nif!,icon: Icons.code,)),
                       SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.person,size: 20,color: Colors.teal,),
-                          SizedBox(width: 10,),
-                          Text('Num de Telephone',style: GoogleFonts.lato(color: Colors.black,fontSize:14 , fontWeight: FontWeight.bold ),),
-                        ],
-                      ),
+                      Center(child: Ritch_Text(title: 'Nic',detail:widget.fournisseur!.nic!,icon: Icons.code,)),
                       SizedBox(height: 5),
-                      Text(widget.fournisseur!.telephone!.toString(),
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines:2,
-                        style: GoogleFonts.lato(color: Colors.black,fontSize: 14 , fontWeight: FontWeight.normal ),),
+                      Center(child: Ritch_Text(title: 'Art',detail:widget.fournisseur!.art!,icon: Icons.code,)),
                       SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.person,size: 20,color: Colors.teal,),
-                          SizedBox(width: 10,),
-                          Text('Address',style: GoogleFonts.lato(color: Colors.black,fontSize:14 , fontWeight: FontWeight.bold ),),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Text(widget.fournisseur!.address!,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines:2,
-                        style: GoogleFonts.lato(color: Colors.black,fontSize: 14 , fontWeight: FontWeight.normal ),),
-                      SizedBox(height: 3),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.person,size: 20,color: Colors.teal,),
-                          SizedBox(width: 10,),
-                          Text('Nom De Willaya',style: GoogleFonts.lato(color: Colors.black,fontSize:14 , fontWeight: FontWeight.bold ),),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Text(widget.fournisseur!.willaya!,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines:2,
-                        style: GoogleFonts.lato(color: Colors.black,fontSize: 14 , fontWeight: FontWeight.normal ),),
-                      SizedBox(height: 3),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.person,size: 20,color: Colors.teal,),
-                          SizedBox(width: 10,),
-                          Text('Activite',style: GoogleFonts.lato(color: Colors.black,fontSize:14 , fontWeight: FontWeight.bold ),),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Text(widget.fournisseur!.activite!,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines:2,
-                        style: GoogleFonts.lato(color: Colors.black,fontSize: 14 , fontWeight: FontWeight.normal ),),
-                      SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.person,size: 20,color: Colors.teal,),
-                          SizedBox(width: 10,),
-                          Text('Num Nif',style: GoogleFonts.lato(color: Colors.black,fontSize:14 , fontWeight: FontWeight.bold ),),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Text(widget.fournisseur!.nif!,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines:2,
-                        style: GoogleFonts.lato(color: Colors.black,fontSize: 14 , fontWeight: FontWeight.normal ),),
-                      SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.person,size: 20,color: Colors.teal,),
-                          SizedBox(width: 10,),
-                          Text('Num Nic',style: GoogleFonts.lato(color: Colors.black,fontSize:14 , fontWeight: FontWeight.bold ),),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Text(widget.fournisseur!.nic!,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines:2,
-                        style: GoogleFonts.lato(color: Colors.black,fontSize: 14 , fontWeight: FontWeight.normal ),),
-                      SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.person,size: 20,color: Colors.grey,),
-                          SizedBox(width: 10,),
-                          Text('Num Rc',style: GoogleFonts.lato(color: Colors.black,fontSize:14 , fontWeight: FontWeight.bold ),),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Text(widget.fournisseur!.rc!,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines:2,
-                        style: GoogleFonts.lato(color: Colors.black,fontSize: 14 , fontWeight: FontWeight.normal ),),
-                      SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.person,size: 20,color: Colors.teal,),
+                      Center(child: Ritch_Text(title: 'Rc',detail:widget.fournisseur!.rc!,icon: Icons.code,)),
+                      SizedBox(height: 20),
 
 
-                          Text('Num Art',style: GoogleFonts.lato(color: Colors.black,fontSize:14 , fontWeight: FontWeight.bold ),),
-                          SizedBox(width: 10,),
 
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Text(widget.fournisseur!.art!,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines:2,
-                        style: GoogleFonts.lato(color: Colors.black,fontSize: 14 , fontWeight: FontWeight.normal ),),
 
 
 

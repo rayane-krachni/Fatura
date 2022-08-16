@@ -8,10 +8,9 @@ import 'package:freelance/Screens/Editting/produit_edit.dart';
 class ProduitSession{
   static SqlDb mysqldb =SqlDb();
   static  Future<int> Addproduit(String name,int tva,double prix,String code,int stock) async{
-    print ("response +++++++");
+
     int response = await mysqldb.insertDatabase("INSERT INTO 'produit' (name,tva,prix,code,stock) VALUES (?,?,?,?,?)",[name,tva,prix,code,stock]);
-    print ("response ====");
-    print ("response $response");
+
     return response;
 
   }
@@ -23,8 +22,7 @@ class ProduitSession{
   }
   static  Future<int> DeleteProduit(int idProduit) async{
     int response = await mysqldb.deleteDatabase('DELETE  FROM "produit" WHERE "id"=$idProduit');
-    print ("delte prod response ====");
-    print ("response $response");
+
     return response;
 
   }
@@ -44,7 +42,7 @@ class ProduitSession{
     var response= await mysqldb.readDatabase('SELECT * FROM "produit" WHERE "id"=$id ');
 
     List<Produit_Model> listProduitid=(response as List).map((e) => Produit_Model.formMap(e)).toList();
-    print("msg msg from produitttsession");
+
     return listProduitid;
   }
 
@@ -53,7 +51,7 @@ class ProduitSession{
   static Future<List<ProduitFacture_Model>>   getProduitName() async {
     var response2= await mysqldb.readDatabase('SELECT "id","name"  FROM "produit" ' );
     List<ProduitFacture_Model> information = (response2 as List).map((c) => ProduitFacture_Model.fromMap(c)).toList();
-    print("msg msg from session");
+
     return information;
   }
 

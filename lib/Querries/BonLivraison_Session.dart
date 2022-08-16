@@ -8,18 +8,13 @@ import 'package:freelance/Querries/AppConfigue.dart';
 class BonLivraisonSession{
   static SqlDb mysqldb =SqlDb();
   static  Future<int> Addbills(int id_fournisseur,int id_client,int id_facture,String date,String transport ,String matricule,String chauffeur,String mode_pay) async{
-    print ("response +++++++");
     int response = await mysqldb.insertDatabase("INSERT INTO 'bon_livraison' (id_fournisseur,id_client,id_facture,date,transport,matricule,chauffeur,mode_pay) VALUES (?,?,?,?,?,?,?,?)",[id_fournisseur,id_client,id_facture,date,transport,matricule,chauffeur,mode_pay]);
-    print ("response ====");
-    print ("response $response");
     return response;
 
   }
 
   static  Future<int> DeleteBills(int idBills) async{
     int response = await mysqldb.deleteDatabase('DELETE  FROM "bon_livraison" WHERE "id"=$idBills');
-    print ("delte prod response ====");
-    print ("response $response");
     return response;
 
   }

@@ -4,7 +4,7 @@ import 'package:freelance/Items/fournisseur_item.dart';
 import 'package:freelance/Model/Fournisseur/Fournisseur_Model.dart';
 import 'package:freelance/Providers/Fournisseur_Management.dart';
 import 'package:freelance/Querries/Fournisseur_Session.dart';
-import 'package:freelance/Screens/Consultation/Bon_Livraison.dart';
+
 import 'package:freelance/Screens/Creation/Fournisseur.dart';
 import 'package:freelance/Theme/Theme.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,7 +26,7 @@ class _FournisseurState extends State<Fournisseur> {
     List<Fournisseur_Model> map = await FournisseurSession.getAll();
     fournisseurs=map;
     fournisseur_manager.fournisseur=true;
-    print('fff$fournisseurs');
+
   }
 
   @override
@@ -117,7 +117,7 @@ class _FournisseurState extends State<Fournisseur> {
                     ),
                   ) : fournisseurs?.isEmpty ?? true ?  Center(
                     //
-                      child: FlatButton(child: Center(child: Text('Y a pas des  Fournisseurs Existees \n  Clicker ici pour les ajouter ')),onPressed: ()=>
+                      child: FlatButton(child: Center(child: Text('Clicker ici pour  ajouter un fournisseur ')),onPressed: ()=>
                           Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => AddFournisseurs(),)
@@ -125,9 +125,9 @@ class _FournisseurState extends State<Fournisseur> {
 
                       : ListView.builder(
 
-                        itemCount:searchkey!.text.isNotEmpty ? FilterFournisseur!.length: fournisseurs!.length,
-                        itemBuilder:(BuildContext context,int index){
-                        return FournisseurItem(fournisseur:searchkey!.text.isNotEmpty ? FilterFournisseur![index]: fournisseurs?[index],);
+                    itemCount:searchkey!.text.isNotEmpty ? FilterFournisseur!.length: fournisseurs!.length,
+                    itemBuilder:(BuildContext context,int index){
+                      return FournisseurItem(fournisseur:searchkey!.text.isNotEmpty ? FilterFournisseur![index]: fournisseurs?[index],);
                     } ,
                   ),
                 )

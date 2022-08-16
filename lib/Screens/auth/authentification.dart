@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:freelance/Screens/HomePage.dart';
 import 'package:freelance/Screens/auth/signup.dart';
 import 'package:freelance/Theme/Theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../Querries/sharedpref.dart';
 
 
 
@@ -13,7 +16,19 @@ class Authentification extends StatefulWidget {
 }
 
 class _AuthentificationState extends State<Authentification> {
+ TextEditingController? name,password;
+ bool? visible;
 
+
+ @override
+  void initState()  {
+
+   name= TextEditingController();
+   password=TextEditingController();
+   visible=false;
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +73,8 @@ class _AuthentificationState extends State<Authentification> {
                       child: Padding(
                         padding: const EdgeInsets.only(top:1.0,left: 15,right: 5,bottom:12),
                         child: TextFormField(
-                          decoration: InputDecoration(
+                          controller: name,
+                          decoration: const InputDecoration(
                               hintText: "Nom d'utilisateur",
                               suffixIcon: Icon(Icons.person,size: 18,)
                           ),
@@ -84,9 +100,16 @@ class _AuthentificationState extends State<Authentification> {
                       child: Padding(
                         padding: const EdgeInsets.only(top:1.0,left: 15,right: 5,bottom:12),
                         child: TextFormField(
+                          obscureText: visible! ? false :true ,
+                          controller: password,
                           decoration: InputDecoration(
                               hintText: "Mot de pass",
-                              suffixIcon: Icon(Icons.code,size: 18,)
+                              suffixIcon: GestureDetector(
+                                onTap:(){
+
+                                  visible=!visible!; },
+
+                                  child:visible! ? Icon(Icons.lock_open ,size: 18,):Icon(Icons.lock ,size: 18,))
                           ),
                         ),
                       )),
@@ -109,8 +132,20 @@ class _AuthentificationState extends State<Authentification> {
                     ),  ),
 
                   child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>const HomePage()));
+                      onPressed: () async {
+                        if(name!.text.isNotEmpty &&  password!.text.isNotEmpty)
+                          {
+
+                            if((name!.text == 'krachni lahcen')&(password!.text == 'krachni123') ){
+                              Prefs.setBool('log', true);
+                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>const HomePage()));
+                            }
+                          }
+
+                        else{
+
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text(' incorrect information ')));
+                        }
 
                       },
 
@@ -119,10 +154,9 @@ class _AuthentificationState extends State<Authentification> {
                   ),
                 ),
                 SizedBox(height: 20,),
-                FlatButton(onPressed:()=>{
+               /* FlatButton(onPressed:()=>{
                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>const SignUp()))
-
-                }, child: Text("je n'ai pas un compte ?"))
+                }, child: Text("je n'ai pas un compte ?"))*/
 
               ],
             ),

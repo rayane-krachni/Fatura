@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:freelance/Items/Facture_item.dart';
+import 'package:freelance/Items/facture_item.dart';
 import 'package:freelance/Model/Fcature/Facture_Model.dart';
 import 'package:freelance/Providers/Facture_Management.dart';
 import 'package:freelance/Querries/Facture_Session.dart';
@@ -8,9 +8,6 @@ import 'package:freelance/Screens/Creation/Facture.dart';
 import 'package:freelance/Screens/Creation/Produit.dart';
 import 'package:freelance/Theme/Theme.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'dart:io';
-import 'package:pdf/pdf.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 class Consulte_Facture extends StatefulWidget {
@@ -115,7 +112,7 @@ class _Consulte_FactureState extends State<Consulte_Facture> {
                   Expanded(
 
                     child: !facturemanager.loadingfacture
-                      ?     const Center(
+                        ?     const Center(
                       child: SpinKitPouringHourGlassRefined  (
                         color: Colors.teal,
                         size: 50.0,
@@ -124,7 +121,7 @@ class _Consulte_FactureState extends State<Consulte_Facture> {
                       ),
                     ) : factures?.isEmpty ?? true ?  Center(
                       //
-                        child: FlatButton(child: Center(child: Text('    Non Client Existee \n Clicker ici pour lajouter ')),onPressed: ()=>
+                        child: FlatButton(child: Center(child: Text('Clicker ici pour jouter une facture ')),onPressed: ()=>
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => AddFacture(),)

@@ -44,7 +44,7 @@ class _EditFournisseursState extends State<EditFournisseurs> {
 
   void Edit_Fournisseur()async {
 
-  int insrtcleint= await FournisseurSession.EditFournisseur(widget.fournisseur!.id!,name,company, Address, willaya, activite, nic, nif, art, rc, phone);
+    int insrtcleint= await FournisseurSession.EditFournisseur(widget.fournisseur!.id!,name,company, Address, willaya, activite, nic, nif, art, rc, phone);
     if( insrtcleint!= 0)
     {
 
@@ -383,7 +383,7 @@ class _EditFournisseursState extends State<EditFournisseurs> {
                           art.isEmpty||
                           rc.isEmpty||
                           phone==''){
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Empty fields ')));
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Remplir Les champs ')));
                       }
                       return Edit_Fournisseur();
                     },

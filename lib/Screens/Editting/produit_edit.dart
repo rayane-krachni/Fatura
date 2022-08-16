@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:freelance/Model/Produit/Produit_Model.dart';
 import 'package:freelance/Querries/Produit_Session.dart';
 import 'package:freelance/Screens/HomePage.dart';
-import 'package:freelance/Screens/Products.dart';
 import 'package:freelance/Theme/Theme.dart';
 import 'package:freelance/widgets/Success_Diag.dart';
 import 'package:freelance/widgets/Wrong_Diag.dart';
@@ -245,7 +244,7 @@ class _Edit_ProduitState extends State<Edit_Produit> {
                           stock==''
                       )
                       {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Empty fields ')));
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Remplir Les Chanps ')));
 
                       }
                       else{Update_Produit();}

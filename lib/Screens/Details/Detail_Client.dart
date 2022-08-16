@@ -35,15 +35,15 @@ class _ClientDetailState extends State<ClientDetail> {
               height: _height*0.3,
 
               decoration: const BoxDecoration(
-                color:Colors.teal ,
-                borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(30),
-                  bottomLeft: Radius.circular(30),
-                )
+                  color:Colors.teal ,
+                  borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(30),
+                    bottomLeft: Radius.circular(30),
+                  )
               ),
               child:  Align(
                 alignment:Alignment.topCenter,
-                child: Text('Les Details des Clients',style: GoogleFonts.lato(color: Colors.white,fontSize: 19 ),),),
+                child: Text('Les Details de Client',style: GoogleFonts.lato(color: Colors.white,fontSize: 19 ),),),
             ),
           ),
           Positioned(
@@ -88,25 +88,39 @@ class _ClientDetailState extends State<ClientDetail> {
                         endIndent:20,
                         indent: 20,
                       ),
-                      SizedBox(height: 10,),
-                       Ritch_Text(title: 'Nom De Client', detail: widget.client!.fullname!, icon: Icons.person),
-                      SizedBox(height: 5),
-                       Ritch_Text(title: 'Num de Telephone', detail: widget.client!.telephone!.toString(), icon: Icons.phone),
-                      SizedBox(height: 5),
-                      Ritch_Text(title: 'Address', detail: widget.client!.address!, icon: Icons.person),
-                      SizedBox(height: 5),
-                      Ritch_Text(title: 'Nom De Willaya', detail: widget.client!.willaya!, icon: Icons.person),
-                      SizedBox(height: 5),
-                      Ritch_Text(title: 'Activite', detail: widget.client!.activite!, icon: Icons.person),
-                      SizedBox(height: 5),
-                      Ritch_Text(title: 'Nif', detail: widget.client!.nif!, icon: Icons.phone),
-                      SizedBox(height: 5),
-                      Ritch_Text(title: 'Nic', detail: widget.client!.nic!, icon: Icons.person),
-                      SizedBox(height: 5),
-                      Ritch_Text(title: 'Art', detail: widget.client!.art!, icon: Icons.person),
-                      SizedBox(height: 5),
+
                       Ritch_Text(title: 'Rc', detail: widget.client!.rc!, icon: Icons.person),
 
+                      SizedBox(height: 10,),
+                      Center(child: Ritch_Text(title: 'Nom de Client',detail: widget.client!.fullname!,icon: Icons.production_quantity_limits,)),
+                      SizedBox(height: 5),
+                      Center(child: Ritch_Text(title: 'Num de Telephone',detail: widget.client!.telephone!.toString(),icon: Icons.phone,)),
+                      SizedBox(height: 5),
+                      Center(child: Ritch_Text(title: 'Address',detail:'',icon: Icons.location_on,)),
+                      SizedBox(height: 5),
+                      Text(widget.client!.address!,overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.left,
+                        maxLines:3,
+                        style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400),     softWrap: true,
+                      ),
+                      Center(child: Ritch_Text(title: 'Nom De Willaya',detail:widget.client!.willaya!,icon: Icons.location_on,)),
+                      SizedBox(height: 5),
+                      Center(child: Ritch_Text(title: 'Activite',detail:'',icon: Icons.production_quantity_limits,)),
+                      SizedBox(height: 5),
+                      Text(widget.client!.activite!,overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.left,
+                        maxLines:3,
+                        style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400),     softWrap: true,
+                      ),
+                      SizedBox(height: 5),
+                      Center(child: Ritch_Text(title: 'Nif',detail:widget.client!.nif!,icon: Icons.code,)),
+                      SizedBox(height: 5),
+                      Center(child: Ritch_Text(title: 'Nic',detail:widget.client!.nic!,icon: Icons.code,)),
+                      SizedBox(height: 5),
+                      Center(child: Ritch_Text(title: 'Art',detail:widget.client!.art!,icon: Icons.code,)),
+                      SizedBox(height: 5),
+                      Center(child: Ritch_Text(title: 'Rc',detail:widget.client!.rc!,icon: Icons.code,)),
+                      SizedBox(height: 20),
 
 
 
@@ -115,7 +129,7 @@ class _ClientDetailState extends State<ClientDetail> {
 
                     ],
 
-              ),
+                  ),
                 ),
               ),
             ),
@@ -161,7 +175,6 @@ class _ClientDetailState extends State<ClientDetail> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-
                                     SizedBox(height: 3),
                                  SizedBox(height: 3),
                                   SizedBox(height: 3),
@@ -178,11 +191,9 @@ class _ClientDetailState extends State<ClientDetail> {
                                     overflow: TextOverflow.ellipsis,
                                     maxLines:2,
                                     style: GoogleFonts.lato(color: Colors.black,fontSize: 16 , fontWeight: FontWeight.w600 ),),
-
                                 ],
                               ),
                             ),
-
                           ],
                         ),
                       ),

@@ -4,6 +4,7 @@ import 'package:freelance/Querries/Client_session.dart';
 import 'package:freelance/Screens/HomePage.dart';
 import 'package:freelance/Screens/Home_Client.dart';
 import 'package:freelance/widgets/Success_Diag.dart';
+import 'package:freelance/widgets/Wrong_Diag.dart';
 
 import '../../Theme/Theme.dart';
 
@@ -53,6 +54,7 @@ class _Edit_clientState extends State<Edit_client> {
     }
     else {
       print('results $insrtcleint');
+      showDialog(context: context, builder:(_)=> Wrong_Dialog());
     }
 
   }
@@ -432,7 +434,7 @@ class _Edit_clientState extends State<Edit_client> {
                     color: Colors.transparent ,
                     onPressed: () {
                       if  (
-                          name.isEmpty||
+                      name.isEmpty||
                           Address.isEmpty||
                           willaya.isEmpty||
                           activite.isEmpty||
@@ -443,7 +445,7 @@ class _Edit_clientState extends State<Edit_client> {
                           phone==''){
                         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Empty fields ')));
                       }
-                       return Update_Client();
+                      return Update_Client();
                     },
 
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),

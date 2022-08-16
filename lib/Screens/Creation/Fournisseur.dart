@@ -48,13 +48,13 @@ class _AddFournisseursState extends State<AddFournisseurs> {
     int insrtcleint= await FournisseurSession.AddFournisseur(name,company, Address, willaya, activite, nic, nif, art, rc, phone);
     if( insrtcleint!= 0)
     {
-      print('hgjgh');
-    //  showDialog(context: context, builder:(_)=> Wrong_Dialog());
 
-     showDialog(context: context, builder:(_)=> Success_Dialog(mytext: "Le nouveau Founisseur a ete bien ajoutee",mywidgets:()=>HomePage()));
+      //  showDialog(context: context, builder:(_)=> Wrong_Dialog());
+
+      showDialog(context: context, builder:(_)=> Success_Dialog(mytext: "Le nouveau Founisseur a ete bien ajoutee",mywidgets:()=>HomePage()));
     }
     else {
-      print('results $insrtcleint');
+
       showDialog(context: context, builder:(_)=> Wrong_Dialog());
 
     }
@@ -84,7 +84,7 @@ class _AddFournisseursState extends State<AddFournisseurs> {
               Align(
 
                   alignment: Alignment.topLeft,
-                  child: Text("Svp Remplir tous les champs necessaire",style: ThemeStyle.secondtitle,)),
+                  child: Text("Svp Remplir tous les champs necessaires",style: ThemeStyle.secondtitle,)),
               const SizedBox(height: 10,),
               Form(
                   child: Column(
@@ -376,18 +376,18 @@ class _AddFournisseursState extends State<AddFournisseurs> {
 
                 child: ElevatedButton(
                     onPressed: () {
-                     if  (  name.isEmpty||
-                                company.isEmpty||
-                                Address.isEmpty||
-                                willaya.isEmpty||
-                                activite.isEmpty||
-                                nic.isEmpty||
-                                nif.isEmpty||
-                                art.isEmpty||
-                                rc.isEmpty||
-                                phone==''){
-                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Remplir Les Champs Svp ')));
-                     }
+                      if  (  name.isEmpty||
+                          company.isEmpty||
+                          Address.isEmpty||
+                          willaya.isEmpty||
+                          activite.isEmpty||
+                          nic.isEmpty||
+                          nif.isEmpty||
+                          art.isEmpty||
+                          rc.isEmpty||
+                          phone==''){
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Remplir Les Champs Svp ')));
+                      }
                       return Insert_Fournisseur();
                     },
 

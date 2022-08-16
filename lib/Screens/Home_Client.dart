@@ -46,102 +46,101 @@ class _Home_ClientState extends State<Home_Client> {
     return ChangeNotifierProvider.value(
       value: manager,
       child:Consumer<Client_Manage>(builder: (context,client_manager,_){
-          return Padding(
-            padding: const EdgeInsets.only(top: 5.0,left: 20,right: 20,bottom: 20),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Align(
-                        alignment: Alignment.topLeft,
-                        child: Text("Session des Clients  !",style:  ThemeStyle.initialtitle)),
-                    IconButton(icon:Icon(Icons.add_circle_outlined,size: 33,color: Colors.teal,), onPressed: () {   Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Add_client()),
-                    ); },)
-                  ],
-                ),
-                const SizedBox(height: 5,),
-                Text("Dans cette vous pouvez consulter , modifier et suprimer votre clients",style: ThemeStyle.secondtitle,),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0,bottom: 10),
-                  child: Container(
+        return Padding(
+          padding: const EdgeInsets.only(top: 5.0,left: 20,right: 20,bottom: 20),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Align(
+                      alignment: Alignment.topLeft,
+                      child: Text("Session des Clients  !",style:  ThemeStyle.initialtitle)),
+                  IconButton(icon:Icon(Icons.add_circle_outlined,size: 33,color: Colors.teal,), onPressed: () {   Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Add_client()),
+                  ); },)
+                ],
+              ),
+              const SizedBox(height: 5,),
+              Text("Dans cette vous pouvez consulter , modifier et suprimer votre clients",style: ThemeStyle.secondtitle,),
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0,bottom: 10),
+                child: Container(
 
-                    height: _height*0.06,
-                    width: double.infinity,
-                    decoration:  BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        boxShadow: [BoxShadow(
-                            blurRadius:5 ,
-                            color: Colors.grey.withOpacity(0.2),
-                            offset: Offset(0,3)
-                        )]
-                    ),
-                    child: TextFormField(
-                      controller: searchkey,
-                      onChanged: (value){
-                       value=value.toLowerCase();
-                       setState(() {
-                         FilterClient=mmap!.where((c) {
+                  height: _height*0.06,
+                  width: double.infinity,
+                  decoration:  BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      boxShadow: [BoxShadow(
+                          blurRadius:5 ,
+                          color: Colors.grey.withOpacity(0.2),
+                          offset: Offset(0,3)
+                      )]
+                  ),
+                  child: TextFormField(
+                    controller: searchkey,
+                    onChanged: (value){
+                      value=value.toLowerCase();
+                      setState(() {
+                        FilterClient=mmap!.where((c) {
 
-                           var searchclient=c.fullname!.toLowerCase();
-                           return searchclient.contains(value);
+                          var searchclient=c.fullname!.toLowerCase();
+                          return searchclient.contains(value);
 
-                         } ).toList();
-                       });
-                      },
-                      decoration:  InputDecoration(
+                        } ).toList();
+                      });
+                    },
+                    decoration:  InputDecoration(
 
-                        border: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        errorBorder: InputBorder.none,
-                        disabledBorder: InputBorder.none,
-                        hintText: 'Recherche',
-                        helperStyle: GoogleFonts.lato(color:ThemeStyle.muted,fontSize: 9 ),
-                        prefixIcon: Icon(Icons.search_rounded),
-
-                      ),
+                      border: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
+                      hintText: 'Recherche',
+                      helperStyle: GoogleFonts.lato(color:ThemeStyle.muted,fontSize: 9 ),
+                      prefixIcon: Icon(Icons.search_rounded),
 
                     ),
+
                   ),
                 ),
-                /*!client_manager.loading ?
-
+              ),
+              /*!client_manager.loading ?
                 IconButton(icon:Icon(Icons.add_circle_outlined,size: 33,color: Colors.teal,), onPressed: () {   Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => Add_client()),
                 ); },):*/
-                    Expanded(
-                      child: !client_manager.loading ?  const
-                       Center(
-                         child: SpinKitPouringHourGlassRefined  (
-                          color: Colors.teal,
-                          size: 50.0,
-                          duration: const Duration(milliseconds: 12000),
+              Expanded(
+                  child: !client_manager.loading ?  const
+                  Center(
+                    child: SpinKitPouringHourGlassRefined  (
+                      color: Colors.teal,
+                      size: 50.0,
+                      duration: const Duration(milliseconds: 12000),
 
-                        ),
-                      ) : mmap?.isEmpty ?? true ?  Center(
-                        //
-                        child: FlatButton(child: Center(child: Text('Y a pas des  Clients Existees \n Clicker ici pour les ajoutees ')),onPressed: ()=>
+                    ),
+                  ) : mmap?.isEmpty ?? true ?  Center(
+                    //
+                      child: FlatButton(child: Center(child: Text(' Clicker ici pour ajouter un client ')),onPressed: ()=>
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Add_client(),)
-                            )))
-                          : ListView.builder(
-                             itemCount:searchkey!.text.isNotEmpty ? FilterClient!.length: mmap?.length,
-                               itemBuilder:(BuildContext context,int i){
+                              context,
+                              MaterialPageRoute(builder: (context) => Add_client(),)
+                          )))
+                      : ListView.builder(
+                    itemCount:searchkey!.text.isNotEmpty ? FilterClient!.length: mmap?.length,
+                    itemBuilder:(BuildContext context,int i){
 
-                               return ClientItem(client:searchkey!.text.isNotEmpty ? FilterClient![i]: mmap?[i],);
-                                } ,
-                              )
-                )
-              ],
-            ),
-          );
-        }
+                      return ClientItem(client:searchkey!.text.isNotEmpty ? FilterClient![i]: mmap?[i],);
+                    } ,
+                  )
+              )
+            ],
+          ),
+        );
+      }
 
       ),
     );

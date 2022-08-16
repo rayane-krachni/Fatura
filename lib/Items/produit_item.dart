@@ -22,7 +22,7 @@ class _ProduitsItemState extends State<ProduitsItem> {
     int insrtcleint=   await ProduitSession.DeleteProduit(widget.produit!.id!);
     if( insrtcleint!= 0)
     {
-      showDialog(context: context, builder:(_)=>Success_Dialog(mytext: "Client done",mywidgets :()=> HomePage()));
+      showDialog(context: context, builder:(_)=>Success_Dialog(mytext: "Ce item est supprimé",mywidgets :()=> HomePage()));
     }
     else {
       print('results $insrtcleint');
@@ -140,7 +140,7 @@ class _ProduitsItemState extends State<ProduitsItem> {
                               },
 
 
-                            icon: Icon(Icons.more_vert,size: 30,color: Colors.teal,))
+                              icon: Icon(Icons.more_vert,size: 20,color: Colors.teal,))
                         ],
                       ),
                       const CircleAvatar(

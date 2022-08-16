@@ -1,11 +1,14 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:freelance/Querries/sharedpref.dart';
 import 'package:freelance/Screens/HomePage.dart';
 import 'package:freelance/splashScreen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Prefs.init();
   runApp(const MyApp());
 }
 

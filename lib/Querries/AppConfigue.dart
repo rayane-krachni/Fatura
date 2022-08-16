@@ -4,8 +4,10 @@ import 'dart:io' as io;
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
+
 class  SqlDb{
   static Database? _db;
+
 
   Future<Database?> get db async{
     if(_db==null)

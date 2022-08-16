@@ -1,11 +1,13 @@
 
-import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:freelance/Querries/sharedpref.dart';
 import 'package:freelance/Screens/Facture.dart';
 import 'package:freelance/Screens/Fournisseur.dart';
 import 'package:freelance/Screens/Home_Client.dart';
-import 'package:freelance/Screens/Products.dart';
-import 'package:freelance/Theme/Theme.dart';
+import 'package:freelance/Screens/homeProducts.dart';
+
+
+import 'auth/authentification.dart';
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -22,11 +24,39 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const Drawer(),
+
+      /*drawer:  Drawer(
+        child: GestureDetector(
+          onTap: () async{
+
+            Prefs.setBool('log', false);
+            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>const Authentification()));
+
+          },
+          child: Container(
+            child: Row(
+              children: [
+                Icon(Icons.logout),
+                SizedBox(width: 20,),
+                Text('Deconnexion')
+              ],
+            ),
+          ),
+        ),
+      ),*/
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.teal)
+        iconTheme: IconThemeData(color: Colors.teal),
+        leading: IconButton(
+          onPressed: ()async{
+
+            Prefs.setBool('log', false);
+            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>const Authentification()));
+
+          },
+          icon: Icon(Icons.logout),
+        ),
       ),
       body: page[SelectedIndex],
       bottomNavigationBar:BottomNavigationBar(

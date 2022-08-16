@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:freelance/Model/Fournisseur/Fournisseur_Model.dart';
 import 'package:freelance/Querries/Fournisseur_Session.dart';
@@ -24,7 +23,7 @@ class _FournisseurItemState extends State<FournisseurItem> {
     int insrtcleint=   await FournisseurSession.DeleteFournisseur(widget.fournisseur!.id!);
     if( insrtcleint!= 0)
     {
-      showDialog(context: context, builder:(_)=>Success_Dialog(mytext: "Client done",mywidgets :()=> HomePage()));
+      showDialog(context: context, builder:(_)=>Success_Dialog(mytext: "Ce item est supprimé",mywidgets :()=> HomePage()));
     }
     else {
       print('results $insrtcleint');
@@ -159,7 +158,7 @@ class _FournisseurItemState extends State<FournisseurItem> {
                     },
 
 
-                 icon: Icon(Icons.more_vert,size: 30,color: Colors.teal,))
+                    icon: Icon(Icons.more_vert,size: 20,color: Colors.teal,))
 
               ],
             ),

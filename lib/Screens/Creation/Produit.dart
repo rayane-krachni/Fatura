@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freelance/Querries/Produit_Session.dart';
 import 'package:freelance/Screens/HomePage.dart';
-import 'package:freelance/Screens/Products.dart';
+import 'package:freelance/Screens/homeProducts.dart';
 import 'package:freelance/Theme/Theme.dart';
 import 'package:freelance/widgets/Success_Diag.dart';
 import 'package:freelance/widgets/Wrong_Diag.dart';
@@ -39,13 +39,13 @@ class _ProduitState extends State<AddProduit> {
     int insrtproduit= await ProduitSession.Addproduit(name, tva, prix, code, stock);
     if( insrtproduit!= 0)
     {
-      print('succes');
+
       //  showDialog(context: context, builder:(_)=> Wrong_Dialog());
 
-      showDialog(context: context, builder:(_)=> Success_Dialog(mytext: "Le nouveau Founisseur a ete bien ajoutee",mywidgets:()=> HomePage(),));
+      showDialog(context: context, builder:(_)=> Success_Dialog(mytext: "Le nouveau Produit a ete bien ajoutee",mywidgets:()=> HomePage(),));
     }
     else {
-      print('results $insrtproduit');
+
       showDialog(context: context, builder:(_)=> Wrong_Dialog());
 
     }
@@ -75,7 +75,7 @@ class _ProduitState extends State<AddProduit> {
               Align(
 
                   alignment: Alignment.topLeft,
-                  child: Text("Svp Remplir tous les champs necessaire",style: ThemeStyle.secondtitle,)),
+                  child: Text("Svp Remplir tous les champs necessaires",style: ThemeStyle.secondtitle,)),
               const SizedBox(height: 10,),
               Form(
                   child: Column(

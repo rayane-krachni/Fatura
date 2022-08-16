@@ -4,6 +4,8 @@ import 'package:freelance/Model/Produit/Produit_Model.dart';
 import 'package:freelance/Theme/Theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../widgets/ritch_text.dart';
+
 class ProduitDetail extends StatefulWidget {
   Produit_Model? produit;
   ProduitDetail({Key? key,this.produit}) : super(key: key);
@@ -42,7 +44,7 @@ class _ProduitDetailState extends State<ProduitDetail> {
               ),
               child:  Align(
                 alignment:Alignment.topCenter,
-                child: Text('Les Details des Clients',style: GoogleFonts.lato(color: Colors.white,fontSize: 19 ),),),
+                child: Text('Les Details de Produit',style: GoogleFonts.lato(color: Colors.white,fontSize: 19 ),),),
             ),
           ),
           Positioned(
@@ -62,16 +64,20 @@ class _ProduitDetailState extends State<ProduitDetail> {
                         offset: Offset(0,3)
                     )]
                 ),
-                child: Center(
+                child: Padding(
+                  padding: EdgeInsets.all(10),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       const SizedBox(height: 20,),
                       const Center(
 
                         child: CircleAvatar(
-                          backgroundImage: AssetImage("assets/images/client.jpg",),
-                          radius: 45,),
+                          backgroundColor: Colors.transparent,
+                          backgroundImage: AssetImage("assets/images/box.png",),
+                          radius: 40,),
                       ),
                       Center(
 
@@ -87,82 +93,26 @@ class _ProduitDetailState extends State<ProduitDetail> {
                         endIndent:20,
                         indent: 20,
                       ),
-                      SizedBox(height: 10,),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30.0),
+                        child: Column(
+                          children: [
+                            SizedBox(height: 30,),
+                            Center(child: Ritch_Text(title: 'Designation du Produit',detail: widget.produit!.name!,icon: Icons.production_quantity_limits,)),
+                            SizedBox(height: 5),
+                            Center(child: Ritch_Text(title: 'Code du Produit',detail: widget.produit!.code!,icon: Icons.code,)),
+                            SizedBox(height: 5),
+                            Center(child: Ritch_Text(title: 'Prix du Produit',detail: widget.produit!.prix.toString(),icon: Icons.production_quantity_limits,)),
+                            SizedBox(height: 5),
+                            Center(child: Ritch_Text(title: 'Tva du Produit',detail: widget.produit!.tva!.toString(),icon: Icons.production_quantity_limits,)),
+                            SizedBox(height: 5),
+                            Center(child: Ritch_Text(title: 'Stock du Produit',detail:widget.produit!.stock!.toString(),icon: Icons.production_quantity_limits,)),
+                            SizedBox(height: 30,),
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.person,size: 20,color: Colors.teal,),
-                          SizedBox(width: 10,),
-                          Text('Nom De Client',style: GoogleFonts.lato(color: Colors.black,fontSize:14 , fontWeight: FontWeight.bold ),),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Text(widget.produit!.name!,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines:2,
-                        style: GoogleFonts.lato(color: Colors.black,fontSize: 14 , fontWeight: FontWeight.normal ),),
-                      SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.person,size: 20,color: Colors.teal,),
-                          SizedBox(width: 10,),
-                          Text('Num de Telephone',style: GoogleFonts.lato(color: Colors.black,fontSize:14 , fontWeight: FontWeight.bold ),),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Text(widget.produit!.code!,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines:2,
-                        style: GoogleFonts.lato(color: Colors.black,fontSize: 14 , fontWeight: FontWeight.normal ),),
-                      SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.person,size: 20,color: Colors.teal,),
-                          SizedBox(width: 10,),
-                          Text('Address',style: GoogleFonts.lato(color: Colors.black,fontSize:14 , fontWeight: FontWeight.bold ),),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Text(widget.produit!.stock!.toString(),
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines:2,
-                        style: GoogleFonts.lato(color: Colors.black,fontSize: 14 , fontWeight: FontWeight.normal ),),
-                      SizedBox(height: 3),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.person,size: 20,color: Colors.teal,),
-                          SizedBox(width: 10,),
-                          Text('Nom De Willaya',style: GoogleFonts.lato(color: Colors.black,fontSize:14 , fontWeight: FontWeight.bold ),),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Text(widget.produit!.prix!.toString(),
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines:2,
-                        style: GoogleFonts.lato(color: Colors.black,fontSize: 14 , fontWeight: FontWeight.normal ),),
-                      SizedBox(height: 3),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.person,size: 20,color: Colors.teal,),
-                          SizedBox(width: 10,),
-                          Text('Activite',style: GoogleFonts.lato(color: Colors.black,fontSize:14 , fontWeight: FontWeight.bold ),),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Text(widget.produit!.tva!.toString(),
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines:2,
-                        style: GoogleFonts.lato(color: Colors.black,fontSize: 14 , fontWeight: FontWeight.normal ),),
+                          ],
+                        ),
+                      )
+
 
 
 

@@ -43,28 +43,28 @@ class _AddLivraisonState extends State<AddLivraison> {
   void getlistclient() async
   {
     List<ClientFcture_Model> myclientlist= await ClientSession.getClientName();
-    print('mmm $myclientlist');
+
     clientlist=myclientlist;
     Manager.loadingclient=true;
-    print('ggg $clientlist');
+
   }
 
   void getlistfournisseur() async
   {
     List<FournisseurFcture_Model> myfournisseurlist= await FournisseurSession.getFournisseursName();
-    print('rrr $myfournisseurlist');
+
     fournisseurlist=myfournisseurlist;
     Manager.loadingfournisseur=true;
-    print('fff $fournisseurlist');
+
   }
 
   void getlistbills() async
   {
     List<FactureBills_Model> myfacturelist= await FactureSession.getfactureids();
-    print('mmm $myfacturelist');
+
     facturelist=myfacturelist;
     Manager.loadingenvoices=true;
-    print('ggg $myfacturelist');
+
   }
 
   @override
@@ -94,13 +94,12 @@ class _AddLivraisonState extends State<AddLivraison> {
 
 
   void Insert_Bills() async {
-   // print('++++++ ${EnvoicetoId(facturevalue!, facturelist!)!}');
 
     int insrtbills=   await BonLivraisonSession.Addbills(FournisseurtoId(fournisseurvalue!, fournisseurlist!)!, ClienttoId(clientvalue!, clientlist!)!, EnvoicetoId(facturevalue!, facturelist!)!, date, transport, matricule, chauffeur, mode_pay);
-   // print('insrtbills $insrtbills');
+
     if( Controller.isNumiric(insrtbills.toString()))
     {
-      showDialog(context: context, builder:(_)=>Success_Dialog(mytext: "Client done",mywidgets: ()=>HomePage()));
+      showDialog(context: context, builder:(_)=>Success_Dialog(mytext: "la facture a été bien créée ",mywidgets: ()=>HomePage()));
     }
    if(!Controller.isNumiric(insrtbills.toString())) {
       showDialog(context: context, builder:(_)=>Wrong_Dialog(mytext: "tttt",));
@@ -136,7 +135,7 @@ class _AddLivraisonState extends State<AddLivraison> {
                         Align(
 
                             alignment: Alignment.topLeft,
-                            child: Text("Svp Remplir tous les champs necessaire",style: ThemeStyle.secondtitle,)),
+                            child: Text("Svp Remplir tous les champs necessaires",style: ThemeStyle.secondtitle,)),
                         const SizedBox(height: 10,),
                         if (!billsmanage.loadingclient || !billsmanage.loadingfournisseur || !billsmanage.loadingenvoices) Text('wait ...')
                         else Form(
@@ -347,7 +346,6 @@ class _AddLivraisonState extends State<AddLivraison> {
                                             },
                                             selectedItem:  "Select Facture",
                                             onChanged: (String? selectedItem) {
-                                              print('facturevalue $facturevalue');
                                               facturevalue = selectedItem;
                                               EnvoicetoId(facturevalue!, facturelist!);
                                               // addClientModel.notifyLis();
@@ -520,7 +518,7 @@ class _AddLivraisonState extends State<AddLivraison> {
     }
 
 
-    print("idclient $clientitemid");
+
     return clientitemid;
 
   }
@@ -543,7 +541,7 @@ class _AddLivraisonState extends State<AddLivraison> {
     }
 
 
-    print("idfournisseur $fournisseuritemid");
+
     return fournisseuritemid;
 
   }
@@ -555,23 +553,20 @@ class _AddLivraisonState extends State<AddLivraison> {
   }
 
   int? EnvoicetoId(String name,List<FactureBills_Model> facture){
-    print('name$name');
-    print('name$name');
+
     for (int i = 0; i < facture.length; i++)
     {
-      print('name${facture[i].num_facture!.toString()}');
-      print('ids ${facture[i].id!.toString()}');
+
 
       if(  name == facture[i].num_facture.toString() )
       {
-        print("idr  factureee 11 $factureitemid");
+
         factureitemid=facture[i].id;
-        print("idr  factureee 22 $factureitemid");
+
       }
     }
 
 
-    print("idrfactureee $factureitemid");
     return factureitemid;
 
   }

@@ -13,6 +13,7 @@ import 'package:freelance/Querries/Produit_Session.dart';
 import 'package:freelance/Screens/Facture.dart';
 import 'package:freelance/Screens/HomePage.dart';
 import 'package:freelance/widgets/Success_Diag.dart';
+import 'package:freelance/widgets/Wrong_Diag.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -40,7 +41,8 @@ class _AddFactureState extends State<AddFacture> {
   String? fournisseurvalue ;
   String? produitvalue ;
   String? unitevalue;
-  List<String>? controllerunite=[];
+  List<String>? controllerunite;
+  List<String> controllerute = new List<String>.empty(growable: true);
   List<FournisseurFcture_Model>? fournisseurlist;
   List<ProduitFacture_Model>? produitlist;
   int? itemid;
@@ -52,28 +54,28 @@ class _AddFactureState extends State<AddFacture> {
   void getlistclient() async
   {
     List<ClientFcture_Model> myclientlist= await ClientSession.getClientName();
-    print('mmm $myclientlist');
+
     clientlist=myclientlist;
     managerdata.loadingclient=true;
-    print('ggg $clientlist');
+
   }
 
   void getlistproduits() async
   {
     List<ProduitFacture_Model> myproduitlist= await ProduitSession.getProduitName();
-    print('mmm $myproduitlist');
+
     produitlist=myproduitlist;
     managerdata.loadingclient=true;
-    print('ggg $produitlist');
+
   }
 
   void getlistfournisseur() async
   {
     List<FournisseurFcture_Model> myfournisseurlist= await FournisseurSession.getFournisseursName();
-    print('rrr $myfournisseurlist');
+
     fournisseurlist=myfournisseurlist;
     managerdata.loadingfournisseur=true;
-    print('fff $fournisseurlist');
+
   }
 
 
@@ -108,9 +110,7 @@ class _AddFactureState extends State<AddFacture> {
   String dropdownvalue= "Select value";
 
   void Insert_envoice() async {
-    print(getProductsQte(produitsquantite!));
-    print(getProductsremise(produitsremise!));
-    print(getProductsunite(controllerunite!));
+
 
     int insrtinvoice=   await FactureSession.Addinvoice(
         FournisseurtoId(fournisseurvalue!, fournisseurlist!)!,
@@ -124,9 +124,10 @@ class _AddFactureState extends State<AddFacture> {
         );
     if( insrtinvoice!= 0)
     {
-      showDialog(context: context, builder:(_)=>Success_Dialog(mytext: "Client done",mywidgets:()=> HomePage()));
+      showDialog(context: context, builder:(_)=>Success_Dialog(mytext: "la facture a été bien créée ",mywidgets:()=> HomePage()));
     }
     else {
+      showDialog(context: context, builder:(_)=> Wrong_Dialog());
       print('results $insrtinvoice');
     }
 
@@ -159,7 +160,7 @@ class _AddFactureState extends State<AddFacture> {
                     Align(
 
                         alignment: Alignment.topLeft,
-                        child: Text("Svp Remplir tous les champs necessaire",style: ThemeStyle.secondtitle,)),
+                        child: Text("Svp Remplir tous les champs necessaires",style: ThemeStyle.secondtitle,)),
                     const SizedBox(height: 10,),
                     if (!facturemanage.loadingclient || !facturemanage.loadingfournisseur) Text('wait ...')
                     else Form(
@@ -520,14 +521,15 @@ class _AddFactureState extends State<AddFacture> {
                                                         );
                                                       },
                                                       selectedItem: "unite",
-                                                      onChanged: (String? selectedItem) {
-                                                        unitevalue = selectedItem;
-                                                        controllerunite!.add(unitevalue!);
 
-                                                       // ProduitstoId(produitvalue!, produitlist!);
-                                                       // controllerids.add(ProduitstoId(produitvalue!, produitlist!).toString());
-                                                       // getProductsids(controllerids);
-                                                        // addClientModel.notifyLis();
+                                                      onChanged: (String? selectedItem) {
+                                                        setState(() {
+
+                                                          unitevalue = selectedItem;
+                                                          controllerunite![i]=unitevalue!;
+                                                        });
+                                                 ;
+
                                                       },
                                                     ),
                                                   ),
@@ -580,7 +582,7 @@ class _AddFactureState extends State<AddFacture> {
                             IconButton(onPressed: ()=>{}, icon: Icon(Icons.add)),
                             FlatButton(onPressed: (){
                               incremment_product();
-                              print(nbr_products);
+
                             }, child: Text("Ajouter un autre produits",style: ThemeStyle.secondtitle,),)
                           ],
                         )),
@@ -640,7 +642,6 @@ class _AddFactureState extends State<AddFacture> {
     }
 
 
-    print("idclient $itemid");
     return itemid;
 
   }
@@ -662,7 +663,7 @@ class _AddFactureState extends State<AddFacture> {
     }
 
 
-    print("idfournisseur $fournisseuritemid");
+
     return fournisseuritemid;
 
   }
@@ -674,8 +675,7 @@ class _AddFactureState extends State<AddFacture> {
   }
 
   int? ProduitstoId(String name,List<ProduitFacture_Model> produits){
-    print('hhhhhh');
-    print('name$name');
+
     for (int i = 0; i < produits.length; i++)
     {
       if(produits[i].name==name)
@@ -685,13 +685,14 @@ class _AddFactureState extends State<AddFacture> {
     }
 
 
-    print("idproduits $produititemid");
+
     return produititemid;
 
   }
 
   int? incremment_product() {
     nbr_products=  nbr_products +1;
+    controllerunite= List.generate(nbr_products, (index) => '');
     managerdata.incriment=true;
     return nbr_products;
 
@@ -705,12 +706,12 @@ class _AddFactureState extends State<AddFacture> {
     for(int i=0;i<controllerids.length; i++)
     {
       myids=myids+controllerids[i]+';';
-      print('11111111$myids');
+
     }}
     if (myids != "" && myids.length > 0) {
       myids = myids.substring(0, myids.length - 1);
     }
-    print('2222222$myids');
+
     return myids;
 
 
@@ -718,24 +719,20 @@ class _AddFactureState extends State<AddFacture> {
 
   String? getProductsQte (List<TextEditingController> Quantite){
     String myqte="";
-    print('sqli $myqte');
+
    for(int i =0;i< Quantite.length ; i++)
    {
-     print('sqlf  ${Quantite[i].text}');
+
      if(Quantite[i].text != "" && Quantite.length>0 )
      {
        myqte=myqte + Quantite[i].text ;
        myqte=myqte+';';
 
      }
-     print('sqli4 $myqte');
+
    }
 
 
-   /* if (myqte != "" && myqte.length > 0) {
-      myqte = myqte.substring(0, myqte.length - 1);
-    }*/
-    print('mmmm $myqte');
     return myqte;
 
 
@@ -743,41 +740,42 @@ class _AddFactureState extends State<AddFacture> {
 
   String? getProductsremise (List<TextEditingController> Remise){
     String myremise="";
-    print('remise $myremise');
+
     for(int i =0;i< Remise.length ; i++)
     {
-      print('remise  ${Remise[i].text}');
+
       if(Remise[i].text != "" && Remise.length>0 )
       {
         myremise=myremise + Remise[i].text ;
         myremise=myremise+';';
 
       }
-      print('remise $myremise');
+
     }
 
 
     if (myremise != "" && myremise.length > 0) {
       myremise = myremise.substring(0, myremise.length - 1);
     }
-    print('mmmm $myremise');
+
     return myremise;
 
 
   }
+
   String? getProductsunite (List<String> unite){
     String myunity="";
-    //controllerids.add(id.toString());
+
     if(unite!=null){
       for(int i=0;i<unite.length; i++)
       {
         myunity=myunity+unite[i]+';';
-        print('11111111$unite');
+
       }}
     if (myunity != "" && myunity.length > 0) {
       myunity = myunity.substring(0, myunity.length - 1);
     }
-    print('2222222$myunity');
+
     return myunity;
 
 
