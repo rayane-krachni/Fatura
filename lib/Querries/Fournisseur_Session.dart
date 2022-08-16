@@ -7,7 +7,7 @@ import 'package:freelance/Screens/Fournisseur.dart';
 import '../Providers/Facture_Management.dart';
 
 
-
+//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
 class FournisseurSession{
   static SqlDb mysqldb =SqlDb();
   static Facture_Manage manager=Facture_Manage();
