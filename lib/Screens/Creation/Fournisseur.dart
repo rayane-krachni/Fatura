@@ -174,7 +174,7 @@ class _AddFournisseursState extends State<AddFournisseurs> {
                         padding: const EdgeInsets.only(top: 7.0),
                         child: Container(
 
-                            height: _height*0.062,
+                            height: _height*0.08,
                             width: double.infinity,
                             decoration:  BoxDecoration(
                                 color: Colors.white,
@@ -186,8 +186,9 @@ class _AddFournisseursState extends State<AddFournisseurs> {
                                 )]
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.only(top:1.0,left: 15,right: 5,bottom:12),
+                              padding: const EdgeInsets.only(top:1.0,left: 15,right: 5,bottom:3),
                               child: TextFormField(
+                                maxLines: 3,
                                 controller: address_control,
                                 decoration: InputDecoration(
                                     hintText: "Addreds",

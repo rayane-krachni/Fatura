@@ -165,7 +165,7 @@ class PdfEnvoiceWithoutLogoApi{
               //buildTotalInvoice(),
 
             ]),
-        SizedBox(height: 3 * PdfPageFormat.cm),
+        SizedBox(height: 1.5 * PdfPageFormat.cm),
         Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -249,7 +249,7 @@ class PdfEnvoiceWithoutLogoApi{
               SizedBox(height: 1 * PdfPageFormat.mm),
               RichText(text: TextSpan(
                   children: <TextSpan>[
-                    TextSpan(text:"N° Nic  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
+                    TextSpan(text:"N° Nis  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
                     TextSpan(text:"${client.nic}" )
 
                   ]
@@ -299,7 +299,7 @@ class PdfEnvoiceWithoutLogoApi{
               SizedBox(height: 1 * PdfPageFormat.mm),
               RichText(text: TextSpan(
                   children: <TextSpan>[
-                    TextSpan(text:"N° Nic  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
+                    TextSpan(text:"N° Nis  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
                     TextSpan(text:"${fournisseur.nif}" )
 
                   ]
@@ -307,7 +307,7 @@ class PdfEnvoiceWithoutLogoApi{
               SizedBox(height: 1 * PdfPageFormat.mm),
               RichText(text: TextSpan(
                   children: <TextSpan>[
-                    TextSpan(text:"N° Nic  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
+                    TextSpan(text:"N° Nis  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
                     TextSpan(text:"${fournisseur.nic}" )
 
                   ]
@@ -349,7 +349,7 @@ class PdfEnvoiceWithoutLogoApi{
       return MapEntry(i,[
         e.code,
         e.name,
-        '${quantite[i] +'/ '+ unite[i] }',
+        '${quantite[i] +'('+ unite[i] +')'}',
         e.tva,
         e.prix,
         ' ${e.prix!*int.parse(quantite[i])} Da',

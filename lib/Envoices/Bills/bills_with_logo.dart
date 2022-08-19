@@ -27,7 +27,7 @@ class PdfBillApi{
       build: (context) => [
         Column(
             children: [
-              Center(child: Text('Bon de Livraison',style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),),),
+              Center(child: Text('Bon de Livraison',style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),),
 
               Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -93,14 +93,13 @@ class PdfBillApi{
         ),
 
         SizedBox(height: 0.5 * PdfPageFormat.cm),
-
         Center(
           child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 RichText(text: TextSpan(
                     children: [
-                      TextSpan(text: 'Numero Facture  : ',style:TextStyle(fontSize: 12, fontWeight: FontWeight.bold) ),
+                      TextSpan(text: 'Bon de Livraison N°: ',style:TextStyle(fontSize: 12, fontWeight: FontWeight.bold) ),
                       TextSpan(text: invoice.num_facture.toString())
                     ]
                 )),
@@ -125,11 +124,18 @@ class PdfBillApi{
                       TextSpan(text: bill.transport,style:TextStyle(fontSize: 11))
                     ]
                 )),
-                SizedBox(width: 1 * PdfPageFormat.cm),
+                SizedBox(width: 0.25 * PdfPageFormat.cm),
                 RichText(text: TextSpan(
                     children: [
                       TextSpan(text: 'Nom De Chauffeur : ',style:TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
                       TextSpan(text: bill.chauffeur,style:TextStyle(fontSize: 11))
+                    ]
+                )),
+                SizedBox(width: 0.25 * PdfPageFormat.cm),
+                RichText(text: TextSpan(
+                    children: [
+                      TextSpan(text: 'Matricule : ',style:TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
+                      TextSpan(text: bill.matricule,style:TextStyle(fontSize: 11))
                     ]
                 )),
 
@@ -190,7 +196,7 @@ class PdfBillApi{
               //buildTotalInvoice(),
 
             ]),
-        SizedBox(height: 2 * PdfPageFormat.cm),
+        SizedBox(height: 1.5 * PdfPageFormat.cm),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -278,7 +284,7 @@ class PdfBillApi{
               SizedBox(height: 1 * PdfPageFormat.mm),
               RichText(text: TextSpan(
                   children: <TextSpan>[
-                    TextSpan(text:"N° Nic  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
+                    TextSpan(text:"N° Nis  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
                     TextSpan(text:"${client.nic}" )
 
                   ]
@@ -328,7 +334,7 @@ class PdfBillApi{
               SizedBox(height: 1 * PdfPageFormat.mm),
               RichText(text: TextSpan(
                   children: <TextSpan>[
-                    TextSpan(text:"N° Nic  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
+                    TextSpan(text:"N° Nis  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
                     TextSpan(text:"${fournisseur.nif}" )
 
                   ]
@@ -336,7 +342,7 @@ class PdfBillApi{
               SizedBox(height: 1 * PdfPageFormat.mm),
               RichText(text: TextSpan(
                   children: <TextSpan>[
-                    TextSpan(text:"N° Nic  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
+                    TextSpan(text:"N° Nis  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
                     TextSpan(text:"${fournisseur.nic}" )
 
                   ]
@@ -378,7 +384,7 @@ class PdfBillApi{
       return MapEntry(i,[
         e.code,
         e.name,
-        ' ${quantite[i] +' / '+unite[i]}',
+        ' ${quantite[i] +' ('+unite[i]+') '}',
         e.tva,
         e.prix,
         ' ${e.prix!*int.parse(quantite[i])} Da',

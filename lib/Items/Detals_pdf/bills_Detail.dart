@@ -50,15 +50,24 @@ class _BillsDetalState extends State<BillsDetal> {
   }
   void getproduitunitelist(String unite)
   {
-
+    String qte='';
     for(int i =0 ; i < unite.length ; i++ )
     {
 
-      if(unite[i]==';')
-      {print('$i true ' +unite[i]);}
+      if(unite[i]==';' )
+      {
+        invoiceunit.add(qte);
+        qte='';
+
+        }
       else
       {
-      invoiceunit.add(unite[i]);
+        qte=qte+unite[i];
+        if(i==unite.length-1){
+          invoiceunit.add(qte);
+          qte='';
+        }
+
 
       }
     }
@@ -219,7 +228,7 @@ class _BillsDetalState extends State<BillsDetal> {
                           SizedBox(
                             child: ListView.builder(
                               shrinkWrap: true,
-                              itemCount: invoiceproduit.length,
+                              itemCount: invoiceproduit.length==0?invoiceqt.length :invoiceproduit.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return Row(children:[
                                   const Icon(Icons.shopping_cart,size: 15,color: Colors.teal, ),

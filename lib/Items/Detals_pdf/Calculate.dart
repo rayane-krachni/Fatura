@@ -73,6 +73,7 @@ class _CalculatingState extends State<Calculating> {
 
       List<Produit_Model> myproduitslist= await ProduitSession.GetAllProductsbyid(int.parse(produitsids[i]));
       invoiceproduit.add(myproduitslist[0]);
+
       //List<Client_Model> mmap = await (response as List).map((c) => Client_Model.fromMap(c)).toList();
 
     }
@@ -98,16 +99,26 @@ class _CalculatingState extends State<Calculating> {
   void getproduitunitelist(String unite)
   {
       String qte='';
-      print(unite.length);
+
       for(int i =0 ; i < unite.length ; i++ )
       {
-        print( '$i ' +unite[i]);
-        if(unite[i]==';')
-          {print('$i true ' +unite[i]);}
+
+        if(unite[i]==';' )
+          {
+            invoiceunit.add(qte);
+            qte='';
+
+           }
         else
-          {print('$i false' +unite[i]);
-           invoiceunit.add(unite[i]);
-          print('$i envoice' +invoiceunit.toString());
+          {
+
+            qte=qte+unite[i];
+           if(i==unite.length-1){
+             invoiceunit.add(qte);
+             qte='';
+           }
+
+
           }
       }
 
@@ -126,6 +137,10 @@ class _CalculatingState extends State<Calculating> {
     getproduitquantitelist(widget.invoice!.quantite!);
 
     getproduitunitelist(widget.invoice!.unite!);
+
+    print(invoiceunit.length);
+
+    print('hhhhh'+ invoiceqt.length.toString() +'');
     super.initState();
   }
   @override
@@ -198,7 +213,7 @@ class _CalculatingState extends State<Calculating> {
                         SizedBox(
                           child: ListView.builder(
                           shrinkWrap: true,
-                          itemCount: invoiceproduit.length,
+                          itemCount: invoiceqt.length,
                           itemBuilder: (BuildContext context, int index) {
                             return Row(children:[
                               const Icon(Icons.shopping_cart,size: 15,color: Colors.teal, ),

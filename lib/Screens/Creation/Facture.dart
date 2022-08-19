@@ -41,7 +41,8 @@ class _AddFactureState extends State<AddFacture> {
   String? fournisseurvalue ;
   String? produitvalue ;
   String? unitevalue;
-  List<String>? controllerunite;
+  List<String> controllerunite=[];
+  List<String> listunite=[];
   List<String> controllerute = new List<String>.empty(growable: true);
   List<FournisseurFcture_Model>? fournisseurlist;
   List<ProduitFacture_Model>? produitlist;
@@ -119,7 +120,7 @@ class _AddFactureState extends State<AddFacture> {
         getProductsids(controllerids)! ,
         getProductsQte(produitsquantite!)!,
         'getProductsremise(produitsremise!)!',
-        getProductsunite(controllerunite!)!,
+        getProductsunite(controllerunite)!,
         timber
         );
     if( insrtinvoice!= 0)
@@ -526,9 +527,12 @@ class _AddFactureState extends State<AddFacture> {
                                                         setState(() {
 
                                                           unitevalue = selectedItem;
-                                                          controllerunite![i]=unitevalue!;
+                                                          intialunit(unitevalue!, i);
+                                                          //.add(unitevalue!);
+
+                                                        //  getProductsunite(controllerunite);
                                                         });
-                                                 ;
+
 
                                                       },
                                                     ),
@@ -692,7 +696,7 @@ class _AddFactureState extends State<AddFacture> {
 
   int? incremment_product() {
     nbr_products=  nbr_products +1;
-    controllerunite= List.generate(nbr_products, (index) => '');
+    //controllerunite= List.generate(nbr_products, (index) => '');
     managerdata.incriment=true;
     return nbr_products;
 
@@ -705,6 +709,7 @@ class _AddFactureState extends State<AddFacture> {
     if(controllerids!=null){
     for(int i=0;i<controllerids.length; i++)
     {
+
       myids=myids+controllerids[i]+';';
 
     }}
@@ -763,22 +768,73 @@ class _AddFactureState extends State<AddFacture> {
 
   }
 
+  void intialunit(String val, int index){
+
+    print('cases}');
+    if(controllerunite.length==0 )
+    {
+
+      print('if0 case');
+      controllerunite.add(val);
+
+      print('else case');
+
+
+
+    }
+    else{
+      if(index<controllerunite.length){
+        for(int j=0;j< controllerunite.length;j++)
+        {
+          print('if1 case');
+          if(j==index)
+          {        print('if2 case');
+          controllerunite[j]=val;
+
+          print(controllerunite[j] + '${index}');
+
+
+
+          }
+
+        }
+      }
+      else{
+
+
+      controllerunite.add(val);}
+
+
+    }
+    print(controllerunite);
+
+  }
+
   String? getProductsunite (List<String> unite){
+    print(unite);
     String myunity="";
 
-    if(unite!=null){
+
       for(int i=0;i<unite.length; i++)
       {
-        myunity=myunity+unite[i]+';';
 
-      }}
-    if (myunity != "" && myunity.length > 0) {
-      myunity = myunity.substring(0, myunity.length - 1);
-    }
+        if(i==0){
 
+          myunity=myunity+unite[i]+';';}
+        else{
+
+          myunity=myunity+unite[i]+';';}
+
+
+      }
+
+      print(myunity);
+
+    myunity = myunity.substring(0, myunity.length - 1);
     return myunity;
 
 
   }
+
 }
 
