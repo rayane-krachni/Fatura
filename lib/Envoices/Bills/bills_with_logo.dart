@@ -257,8 +257,8 @@ class PdfBillApi{
 
                   ]
               )),
-              SizedBox(height: 1 * PdfPageFormat.mm),
-              RichText(text: TextSpan(
+              if(client.telephone!=0)SizedBox(height: 1 * PdfPageFormat.mm),
+              if(client.telephone!=0)RichText(text: TextSpan(
                   children: <TextSpan>[
                     TextSpan(text:"Tel/Fax : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
                     TextSpan(text:"${client.telephone}" )
@@ -323,8 +323,8 @@ class PdfBillApi{
             children: [
               // Text("Fournisseur",style:TextStyle(fontWeight: FontWeight.bold,)),
               Text('Entreprise Information',style: TextStyle(fontWeight: FontWeight.bold,)),
-              SizedBox(height: 5 * PdfPageFormat.mm),
-              RichText(text: TextSpan(
+              if(fournisseur.telephone!=0)SizedBox(height: 5 * PdfPageFormat.mm),
+              if(fournisseur.telephone!=0)RichText(text: TextSpan(
                   children: <TextSpan>[
                     TextSpan(text:"Tel/Fax  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
                     TextSpan(text:"${fournisseur.telephone}" )
@@ -334,7 +334,7 @@ class PdfBillApi{
               SizedBox(height: 1 * PdfPageFormat.mm),
               RichText(text: TextSpan(
                   children: <TextSpan>[
-                    TextSpan(text:"N° Nis  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
+                    TextSpan(text:"N° Nif  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
                     TextSpan(text:"${fournisseur.nif}" )
 
                   ]
@@ -387,7 +387,7 @@ class PdfBillApi{
         ' ${quantite[i] +' ('+unite[i]+') '}',
         e.tva,
         e.prix,
-        ' ${e.prix!*int.parse(quantite[i])} Da',
+        ' ${e.prix!*int.parse(quantite[i])}',
 
 
 

@@ -299,7 +299,7 @@ class PdfEnvoiceWithoutLogoApi{
               SizedBox(height: 1 * PdfPageFormat.mm),
               RichText(text: TextSpan(
                   children: <TextSpan>[
-                    TextSpan(text:"N° Nis  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
+                    TextSpan(text:"N° Nif  : ",style:TextStyle(fontWeight: FontWeight.bold,) ),
                     TextSpan(text:"${fournisseur.nif}" )
 
                   ]
@@ -352,7 +352,7 @@ class PdfEnvoiceWithoutLogoApi{
         '${quantite[i] +'('+ unite[i] +')'}',
         e.tva,
         e.prix,
-        ' ${e.prix!*int.parse(quantite[i])} Da',
+        ' ${e.prix!*int.parse(quantite[i])}',
 
 
 

@@ -124,7 +124,7 @@ class _Home_ClientState extends State<Home_Client> {
                     ),
                   ) : mmap?.isEmpty ?? true ?  Center(
                     //
-                      child: FlatButton(child: Center(child: Text(' Clicker ici pour ajouter un client ')),onPressed: ()=>
+                      child: TextButton(child: Center(child: Text(' Clicker ici pour ajouter un client ')),onPressed: ()=>
                           Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => Add_client(),)

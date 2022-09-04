@@ -124,7 +124,7 @@ class _ProductsState extends State<Products> {
                       ),
                     ):Center(
                       //
-                        child: FlatButton(child: const Center(child: Text(' Clicker ici pour  ajouter un produit ')),onPressed: ()=>
+                        child: TextButton(child: const Center(child: Text(' Clicker ici pour  ajouter un produit ')),onPressed: ()=>
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => AddProduit(),)

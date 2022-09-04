@@ -28,13 +28,14 @@ class AddFacture extends StatefulWidget {
 
 class _AddFactureState extends State<AddFacture> {
   Facture_Manage managerdata =Facture_Manage();
-  List<String> unite=['g','Kg','Q','T'];
+  List<String> unite=['g','Kg','Q','T','ml','cl','l'];
   TextEditingController ? timber_controller,fournisseur_control,client_control,facture_control,date_control,produit_control,quantite_control,remise_control;
   List<ClientFcture_Model> ? clientlist;
 
-  List<TextEditingController>? produitsquantite =[] ;
+  List<TextEditingController> produitsquantite =[] ;
   List<TextEditingController>? produitsremise=[] ;
   List<String> controllerids = new List<String>.empty(growable: true);
+  List<String> idslist = new List<String>.empty(growable: true);
   List<String> controllerquantite = new List<String>.empty(growable: true);
   List<String> controllerRemise = new List<String>.empty(growable: true);
   String? clientvalue ;
@@ -42,6 +43,7 @@ class _AddFactureState extends State<AddFacture> {
   String? produitvalue ;
   String? unitevalue;
   List<String> controllerunite=[];
+  List<int> controllerid=[];
   List<String> listunite=[];
   List<String> controllerute = new List<String>.empty(growable: true);
   List<FournisseurFcture_Model>? fournisseurlist;
@@ -111,14 +113,16 @@ class _AddFactureState extends State<AddFacture> {
   String dropdownvalue= "Select value";
 
   void Insert_envoice() async {
-
+    getProductsQte(produitsquantite)!;
+    ProduitstooId(controllerids,produitlist!);
+    getProductsids(idslist);
 
     int insrtinvoice=   await FactureSession.Addinvoice(
         FournisseurtoId(fournisseurvalue!, fournisseurlist!)!,
         ClienttoId(clientvalue!, clientlist!)!,
         num_facture, date,
-        getProductsids(controllerids)! ,
-        getProductsQte(produitsquantite!)!,
+        getProductsids(idslist)! ,
+        getProductsQte(produitsquantite)!,
         'getProductsremise(produitsremise!)!',
         getProductsunite(controllerunite)!,
         timber
@@ -384,8 +388,8 @@ class _AddFactureState extends State<AddFacture> {
                                     shrinkWrap: true,
                                     itemCount: nbr_products,
                                     itemBuilder:(BuildContext context,int i){
-                                      produitsremise!.add(new TextEditingController());
-                                      produitsquantite!.add(new TextEditingController());
+                                      produitsremise!.add( TextEditingController());
+                                      produitsquantite.add( TextEditingController());
                                      return   Column(
                                         children: [
                                           const  SizedBox(height: 10,),
@@ -442,11 +446,16 @@ class _AddFactureState extends State<AddFacture> {
                                                 },
                                                 selectedItem: "Selected Produit",
                                                 onChanged: (String? selectedItem) {
+
                                                  produitvalue = selectedItem;
+                                                 intialids(produitvalue!, i);
                                                  ProduitstoId(produitvalue!, produitlist!);
+                                                /* print( ProduitstoId(produitvalue!, produitlist!).toString());
                                                  controllerids.add(ProduitstoId(produitvalue!, produitlist!).toString());
+                                                 print( controllerids.toString());
                                                  getProductsids(controllerids);
-                                                // addClientModel.notifyLis();
+                                                 print(  getProductsids(controllerids).toString());
+                                                // addClientModel.notifyLis();*/
                                                 },
                                                 ),
                                                 ))),
@@ -474,6 +483,7 @@ class _AddFactureState extends State<AddFacture> {
                                                       child: TextFormField(
                                                         controller: produitsquantite![i],
                                                         keyboardType: TextInputType.number,
+
                                                         decoration: const InputDecoration(
                                                             hintText: "Quantite",
                                                             //suffixIcon: Icon(Icons.code,size: 18,)
@@ -584,7 +594,7 @@ class _AddFactureState extends State<AddFacture> {
                         child: Row(
                           children: [
                             IconButton(onPressed: ()=>{}, icon: Icon(Icons.add)),
-                            FlatButton(onPressed: (){
+                            TextButton(onPressed: (){
                               incremment_product();
 
                             }, child: Text("Ajouter un autre produits",style: ThemeStyle.secondtitle,),)
@@ -693,7 +703,93 @@ class _AddFactureState extends State<AddFacture> {
     return produititemid;
 
   }
+  //controllerids
+  void intialids(String val, int index){
 
+    print('cases}');
+    if(controllerids.length==0 )
+    {
+
+      print('if0 id case');
+      controllerids.add(val);
+
+      print('else id  case');
+
+
+
+    }
+    else{
+      if(index<controllerids.length){
+        for(int j=0;j< controllerids.length;j++)
+        {
+          print('if1 case');
+          if(j==index)
+          {        print('if2 case');
+          controllerids[j]=val;
+
+          print(controllerids[j] + '${index}');
+
+
+
+          }
+
+        }
+      }
+      else{
+
+
+        controllerids.add(val);}
+
+
+    }
+    print(controllerids);
+
+  }
+  void ProduitstooId(List<String> name,List<ProduitFacture_Model> produits){
+
+    idslist=[];
+    name.forEach((element) {
+
+      for (int i = 0; i < produits.length; i++)
+      {
+        if(produits[i].name==element)
+        {
+          produititemid=produits[i].id;
+          print('produititemid : $produititemid');
+          idslist.add(produititemid.toString());
+          print('ProduitstooId : $idslist');
+        }
+      }
+      print('ProduitstooId : $idslist');
+
+
+    });
+
+
+
+
+
+
+  }
+  String? getProductsids (List<String> id){
+    String myids="";
+    //controllerids.add(id.toString());
+    if(id!=null){
+      for(int i=0;i<id.length; i++)
+      {
+
+        myids=myids+id[i]+';';
+
+      }}
+    if (myids != "" && myids.length > 0) {
+      myids = myids.substring(0, myids.length - 1);
+    }
+    print('myids$myids');
+    return myids;
+
+
+  }
+  //
   int? incremment_product() {
     nbr_products=  nbr_products +1;
     //controllerunite= List.generate(nbr_products, (index) => '');
@@ -703,30 +799,14 @@ class _AddFactureState extends State<AddFacture> {
 
   }
 
-  String? getProductsids (List<String> id){
-    String myids="";
-    //controllerids.add(id.toString());
-    if(controllerids!=null){
-    for(int i=0;i<controllerids.length; i++)
-    {
 
-      myids=myids+controllerids[i]+';';
-
-    }}
-    if (myids != "" && myids.length > 0) {
-      myids = myids.substring(0, myids.length - 1);
-    }
-
-    return myids;
-
-
-  }
 
   String? getProductsQte (List<TextEditingController> Quantite){
     String myqte="";
 
    for(int i =0;i< Quantite.length ; i++)
    {
+     print('qte ${Quantite[i].text}');
 
      if(Quantite[i].text != "" && Quantite.length>0 )
      {
@@ -737,7 +817,7 @@ class _AddFactureState extends State<AddFacture> {
 
    }
 
-
+    print('qte ${myqte}');
     return myqte;
 
 
@@ -835,6 +915,8 @@ class _AddFactureState extends State<AddFacture> {
 
 
   }
+
+
 
 }
 

@@ -19,64 +19,63 @@ class _Success_DialogState extends State<Success_Dialog> {
     double padding_top= _height*0.11;
     return WillPopScope(
       onWillPop: () async{
-      return false;
+        return false;
       },
-         child: Dialog(
+      child: Dialog(
 
-           backgroundColor: Colors.transparent,
-           shape: RoundedRectangleBorder(
-               borderRadius: BorderRadius.circular(12.0)),
-           child: Container(
-             height: _height*0.3,
-             margin: EdgeInsets.all(0),
-             child: Stack(
-               children: <Widget>[
-                 Container(
-                   width: double.infinity,
-                   decoration: BoxDecoration(
-                     color: Colors.white,
-                     borderRadius: BorderRadius.circular(12.0),
-                   ),
-                   child: Padding(
-                     padding: const EdgeInsets.only(top:100 ),
-                     child: Column(
-                       children: [
-                         Text(widget.mytext!),
-                         FlatButton(onPressed: (){
-                           Navigator.pop(context);
-                           Navigator.pop(context);
-                           }, child: Text('click to dismiss'))
-                       ],
-                     ),
-                   ),
-                 ),
-                 Align(
-                   // These values are based on trial & error method
-                   alignment: Alignment(0.02, -1.3),
-                   child: InkWell(
-                     onTap: () {
-                       Navigator.pop(context);
-                     },
-                     child: Container(
-                       decoration: const BoxDecoration(
-                         color: Colors.teal,
-                         borderRadius: BorderRadius.all(Radius.circular(50)),
-                       ),
-                       child: Icon(
-                         Icons.check,
-                         color: Colors.white,
-                         size: _height*0.11,
-                       ),
-                     ),
-                   ),
-                 ),
-               ],
-             ),
-           ),
-         ),
+        backgroundColor: Colors.transparent,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0)),
+        child: Container(
+          height: _height*0.3,
+          margin: EdgeInsets.all(0),
+          child: Stack(
+            children: <Widget>[
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(top:100 ),
+                  child: Column(
+                    children: [
+                      Text(widget.mytext!),
+                      TextButton(onPressed: (){
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                      }, child: Text('click to dismiss'))
+                    ],
+                  ),
+                ),
+              ),
+              Align(
+                // These values are based on trial & error method
+                alignment: Alignment(0.02, -1.3),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.teal,
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                    ),
+                    child: Icon(
+                      Icons.check,
+                      color: Colors.white,
+                      size: _height*0.11,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
 
-                  
+
   }
 }
-

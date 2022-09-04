@@ -41,7 +41,7 @@ class _Wrong_DialogState extends State<Wrong_Dialog> {
                   child: Column(
                     children: [
                       Text("les info ne sont pas au mode d'enregistrement"),
-                      FlatButton(onPressed: (){
+                      TextButton(onPressed: (){
                         Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => HomePage()));
@@ -79,4 +79,3 @@ class _Wrong_DialogState extends State<Wrong_Dialog> {
 
   }
 }
-

@@ -125,7 +125,7 @@ class _BillsItemState extends State<BillsItem> {
                                 );
                                 //Delete_Client();
                               },
-                          icon: Icon(Icons.more_vert,size: 20,color: Colors.teal,))
+                              icon: Icon(Icons.more_vert,size: 20,color: Colors.teal,))
                         ],
                       ),
                       const CircleAvatar(
@@ -139,7 +139,7 @@ class _BillsItemState extends State<BillsItem> {
                     ],
                   ),
 
-                  FlatButton(onPressed: ()=> {}, child:  Text("Detail",style: GoogleFonts.lato(color:Colors.teal,fontSize: 13,fontWeight: FontWeight.bold ),))
+                  TextButton(onPressed: ()=> {}, child:  Text("Detail",style: GoogleFonts.lato(color:Colors.teal,fontSize: 13,fontWeight: FontWeight.bold ),))
 
                 ],
               ),

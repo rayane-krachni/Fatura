@@ -253,7 +253,11 @@ class _BillsDetalState extends State<BillsDetal> {
 
                               SizedBox(
                                 width: double.maxFinite,
-                                child: RaisedButton(
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.teal, // background
+                                    onPrimary: Colors.transparent, // foreground
+                                  ),
                                   onPressed: () async{
 
                                     final pdfFile= await  PdfBillApi.generate(invoice[0],invoiceclient[0],invoicebill[0],invoiceproduit,invoiceqt,invoiceunit,widget.bill );
@@ -261,14 +265,17 @@ class _BillsDetalState extends State<BillsDetal> {
                                     // Navigator.push(context, MaterialPageRoute(builder: (context) => FactureDetailExported(facture: widget.facture! )))
 
                                   },
-                                  color: Colors.teal,
+                                  //color: Colors.teal,
                                   child: const Text("Exporter Avec Un Logo",style: TextStyle(color: Colors.white,fontSize: 12),) ,
                                 ),
                               ),
                               SizedBox(
                                 width: double.maxFinite,
-                                child: RaisedButton(
-
+                                child:ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.teal, // background
+                                    onPrimary: Colors.transparent, // foreground
+                                  ),
                                   onPressed: () async{
 
                                     final pdfFile= await  PdfBillsWithoutLogoApi.generate(invoice[0],invoiceclient[0],invoicebill[0],invoiceproduit,invoiceqt,invoiceunit,widget.bill );
@@ -276,7 +283,7 @@ class _BillsDetalState extends State<BillsDetal> {
                                     // Navigator.push(context, MaterialPageRoute(builder: (context) => FactureDetailExported(facture: widget.facture! )))
 
                                   },
-                                  color: Colors.teal,
+                                //  color: Colors.teal,
                                   child: const Text("Exporter Sans  Logo",style: TextStyle(color: Colors.white,fontSize: 12)) ,
                                 ),
                               ),

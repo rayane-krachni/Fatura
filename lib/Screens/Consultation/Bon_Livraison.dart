@@ -112,7 +112,7 @@ class _Consulte_BonState extends State<Consulte_Bon> {
                     )  :
                     bills?.isEmpty ?? true ? Center(
                       //
-                        child: FlatButton(child:const Center(child: Text('Y Clicker ici pour  ajouter un bon de livraison ')),onPressed: ()=>
+                        child: TextButton(child:const Center(child: Text('Y Clicker ici pour  ajouter un bon de livraison ')),onPressed: ()=>
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => AddLivraison(),)

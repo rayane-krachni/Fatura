@@ -117,7 +117,7 @@ class _FournisseurState extends State<Fournisseur> {
                     ),
                   ) : fournisseurs?.isEmpty ?? true ?  Center(
                     //
-                      child: FlatButton(child: Center(child: Text('Clicker ici pour  ajouter un fournisseur ')),onPressed: ()=>
+                      child: TextButton(child: Center(child: Text('Clicker ici pour  ajouter un fournisseur ')),onPressed: ()=>
                           Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => AddFournisseurs(),)

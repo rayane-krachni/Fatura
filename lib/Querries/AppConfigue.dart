@@ -26,6 +26,7 @@ class  SqlDb{
   InitialDb() async{
         String databasepath= await getDatabasesPath();
         String path= join(databasepath,'Facture.db');
+        print('databasepath $databasepath');
         Database mydb= await openDatabase(path,onCreate: _onCreate,version: 1,onUpgrade: _OnUpgrade);
         return mydb;
       }
@@ -37,6 +38,7 @@ class  SqlDb{
 
   _onCreate(Database db, int version) async{
     print('on create ');
+
     db.execute('''CREATE TABLE User (
     "id" INTEGER PRIMARY KEY, 
     "full_name" TEXT,

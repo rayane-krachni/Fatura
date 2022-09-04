@@ -154,7 +154,7 @@ class _ProduitsItemState extends State<ProduitsItem> {
                     ],
                   ),
 
-                  FlatButton(onPressed: ()=> {}, child:  Text("Detail",style: GoogleFonts.lato(color:Colors.teal,fontSize: 13,fontWeight: FontWeight.bold ),))
+                  TextButton(onPressed: ()=> {}, child:  Text("Detail",style: GoogleFonts.lato(color:Colors.teal,fontSize: 13,fontWeight: FontWeight.bold ),))
 
                 ],
               ),

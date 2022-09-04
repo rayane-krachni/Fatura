@@ -75,6 +75,7 @@ class _AuthentificationState extends State<Authentification> {
                         child: TextFormField(
                           controller: name,
                           decoration: const InputDecoration(
+
                               hintText: "Nom d'utilisateur",
                               suffixIcon: Icon(Icons.person,size: 18,)
                           ),

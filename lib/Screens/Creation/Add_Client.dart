@@ -426,9 +426,12 @@ class _Add_clientState extends State<Add_client> {
                     ],
                   ),  ),
 
-                child: RaisedButton(
-                    disabledColor: Colors.grey,
-                    color: Colors.transparent ,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.grey, // background
+                      onPrimary: Colors.transparent,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),// foreground
+                    ),
                     onPressed: ()  {
 
                       if  (  name.isEmpty||
@@ -447,7 +450,7 @@ class _Add_clientState extends State<Add_client> {
 
 
 
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
+
                     //style: ElevatedButton.styleFrom(primary: Colors.transparent, shadowColor: Colors.transparent),
                     child: Center(child: Text("Ajouter",style: ThemeStyle.buttontext,))
                 ),

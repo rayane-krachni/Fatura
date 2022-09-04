@@ -213,15 +213,16 @@ class _CalculatingState extends State<Calculating> {
                         SizedBox(
                           child: ListView.builder(
                           shrinkWrap: true,
-                          itemCount: invoiceqt.length,
+                          itemCount: invoiceproduit.length,
                           itemBuilder: (BuildContext context, int index) {
+                            print('te: ${invoiceqt[index] } $index ${invoiceproduit.length}');
                             return Row(children:[
                               const Icon(Icons.shopping_cart,size: 15,color: Colors.teal, ),
                               const SizedBox(width: 5,),
                               Text('Produit $index:  ',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
                               Text(invoiceproduit[index].name!),
                               SizedBox(width: 10,),
-                              Text("Qte: ${invoiceqt[index]}"),
+                              //Text("Qte: ${invoiceqt[index]}"),
                               const SizedBox(width: 10,),
                               Text("tva: ${invoiceproduit[index].tva.toString()} %"),
                               const SizedBox(width: 10,),
@@ -240,7 +241,11 @@ class _CalculatingState extends State<Calculating> {
 
                             SizedBox(
                               width: MediaQuery.of(context).size.width,
-                              child: RaisedButton(
+                              child:ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.teal, // background
+                                  onPrimary: Colors.transparent, // foreground
+                                ),
                                 onPressed: () async{
 
                                   final pdfFile= await  PdfEnvoiceApi.generate(widget.invoice!,invoiceclient[0],invoicefournisseur[0],invoiceproduit,invoiceqt,invoiceunit );
@@ -248,14 +253,17 @@ class _CalculatingState extends State<Calculating> {
                                   // Navigator.push(context, MaterialPageRoute(builder: (context) => FactureDetailExported(facture: widget.facture! )))
 
                                 },
-                                color: Colors.teal,
+                                //color: Colors.teal,
                                 child: const Text("Exporter Avec Un Logo",style: TextStyle(color: Colors.white,fontSize: 12),) ,
                               ),
                             ),
                             SizedBox(
                               width: MediaQuery.of(context).size.width,
-                              child: RaisedButton(
-
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.teal, // background
+                                  onPrimary: Colors.transparent, // foreground
+                                ),
                                 onPressed: () async{
 
                                   final pdfFile= await  PdfEnvoiceWithoutLogoApi.generate(widget.invoice!,invoiceclient[0],invoicefournisseur[0],invoiceproduit,invoiceqt,invoiceunit );
@@ -263,7 +271,7 @@ class _CalculatingState extends State<Calculating> {
                                   // Navigator.push(context, MaterialPageRoute(builder: (context) => FactureDetailExported(facture: widget.facture! )))
 
                                 },
-                                color: Colors.teal,
+                               // color: Colors.teal,
                                 child: Text("Exporter Sans  Logo",style: TextStyle(color: Colors.white,fontSize: 12)) ,
                               ),
                             ),
