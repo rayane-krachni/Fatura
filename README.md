@@ -1,24 +1,24 @@
-# Envoice Application
+# Invoice Application
 
 A new Flutter project.
 
 ## Application Description
 
 This project is a starting point for a Flutter application 
-The main aim of this project is to Facilate the calculation and generate envoices.
+The main aim of this project is to Facilate the calculation and generate invoices.
 
 ### Tools used
 
 1-sqflite as Local DataBase.
 2-Provider For the state management.
-3-Pdf package to export the envoices.
+3-Pdf package to export the invoice.
 
 ### Main Features
 
 1-Authentification
 2-Create /Edit /Delete many objects.
 3-Calculation affected
-4-Generate Envoices
+4-Generate Invoices
 
 
 ### Main Screens
