@@ -1,6 +1,5 @@
 # Invoice Application
 
-A new Flutter project.
 
 ## Application Description
 
