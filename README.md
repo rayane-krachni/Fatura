@@ -6,9 +6,9 @@
 This project is a starting point for a Flutter application 
 The main aim of this project is to Facilate the calculation and generate invoices.
 
-### Tools used
+## Tools used
 
-1- sqflite as Local DataBase.
+[x] sqflite as Local DataBase.
 2- Provider For the state management.
 3- Pdf package to export the invoice.
 
