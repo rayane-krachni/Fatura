@@ -8,15 +8,15 @@ The main aim of this project is to Facilate the calculation and generate invoice
 
 ## Tools used
 
-[x] sqflite as Local DataBase.
-2- Provider For the state management.
-3- Pdf package to export the invoice.
+1 - sqflite as Local DataBase.
+2 - Provider For the state management.
+3 - Pdf package to export the invoice.
 
 ### Main Features
 
-1- Authentification
-2- Create /Edit /Delete many objects.
-3- Calculation affected
+1- Authentification  
+2- Create /Edit /Delete many objects.  
+3- Calculation affected  
 4- Generate Invoices
 
 
